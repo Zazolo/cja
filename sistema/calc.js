@@ -5,8 +5,8 @@
 }
 
 let arroela = {
-    m:{ N, R, W},
-    in: {N, R, W}
+    m:{ N:'', R:'', W:''},
+    in: {N:'', R:'', W:''}
 }
 
 let porca = {
@@ -26,6 +26,7 @@ let calculo = {
 function calcTamanhoParafuso(calculo){
     let totalPlaca = 0;
     let totalArroela = 0;
+    let L;
     for(let i; i < calculo.placa.length; i++){
         totalPlaca += calculo.placa[i].espessura;
     }
@@ -36,10 +37,10 @@ function calcTamanhoParafuso(calculo){
 
     switch(calculo.unidade){
         case 'm':
-            let L = totalPlaca + totalArroela + calculo.porca.m;
+            L = totalPlaca + totalArroela + calculo.porca.m;
         break;
         case 'in':
-            let L = totalPlaca + totalArroela + calculo.porca.in;
+            L = totalPlaca + totalArroela + calculo.porca.in;
         break;
     }
     
@@ -54,23 +55,23 @@ function calcComprimentoRosqueado(calculo){
         case 'm':
             switch(L){
                 case L<=125:
-                    let Lt = 2*calculo.diametro + 6;
+                    Lt = 2*calculo.diametro + 6;
                 break;
                 case 125>L<=200:
-                    let Lt = 2*calculo.diametro + 12;
+                    Lt = 2*calculo.diametro + 12;
                 break;
                 case L>200:
-                    let Lt = 2*calculo.diametro + 25;
+                    Lt = 2*calculo.diametro + 25;
                 break;
             }
         break;
         case 'in':
             switch(L){
                 case L<=6:
-                    let Lt = 2+calculo.diametro + (1/4);
+                    Lt = 2+calculo.diametro + (1/4);
                 break;
                 case L>6:
-                    let Lt = 2+calculo.diametro + (1/2);
+                    Lt = 2+calculo.diametro + (1/2);
                 break;
             }
         break;
@@ -91,10 +92,10 @@ function calcTamParafusoMenosPorca(calculo){
     let l = 0;
     switch(calculo.unidade){
         case 'm':
-            let l= calcTamanhoParafuso(calculo) - calculo.porca.m;
+            l= calcTamanhoParafuso(calculo) - calculo.porca.m;
         break;
         case 'in':
-            let l = calcTamanhoParafuso(calculo) - calculo.porca.in;
+            l = calcTamanhoParafuso(calculo) - calculo.porca.in;
         break;
     }
     return l;    
@@ -108,14 +109,15 @@ function calcAreaPorUtilNaoRosqueada(calculo){
 
 function calcRigidez(calculo){
     let At = calculo.AreaRosqueada;
+    let E;
     switch(calculo.unidade){
         case 'm':
-            let E = 207;
+            E = 207;
         break;
         case 'in':
-            let E = 30;
+            E = 30;
         break;
-        let Kb = (calcAreaPorUtilNaoRosqueada(calculo) * At * E) / ((calcAreaPorUtilNaoRosqueada(calculo) * calcCompPorUtilRosqueavel(calculo)) + (At + calcCompPorUtil_N_Rosqueavel(calculo)));
-        return Kb;
     }
+    let Kb = (calcAreaPorUtilNaoRosqueada(calculo) * At * E) / ((calcAreaPorUtilNaoRosqueada(calculo) * calcCompPorUtilRosqueavel(calculo)) + (At + calcCompPorUtil_N_Rosqueavel(calculo)));
+    return Kb;
 }

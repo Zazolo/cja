@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CJA</title>
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="css/uikit.css" />
+
+        <!-- UIkit JS -->
+        <script src="js/uikit.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
+        <script src="lib/jquery340.js"></script>
+        <script src="sistema/interface.js"></script>
+    </head>
+    <body>
+        <br>
+        <br>
+        <br>
+        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+            <div></div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-width-xxlarge">
+                    <h1 class="uk-heading-medium" id="displayInfoTitle">Bem-vindo(a) ao CJA</h1>
+                    <h3 class="uk-card-title" id="displayInfoSubTitle">Cálculo de Junta Aparafusada</h3>
+                    <!---Tela de introdução-->
+                    <div id="telaIntro">
+                        <button class="uk-button uk-button-default" id="btIniciar">Iniciar</button>
+                    </div>
+                    <!---Tela de seleção da unidade métrica-->
+                    <div id="telaSelectUnidade" class="uk-hidden">
+                            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+                                <li><a href="#">Métrica</a></li>
+                                <li><a href="#">Polegada</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>A unidade métrica será utilizada para os cálculos!</li>
+                                <li>Polegadas será a utilizada para os cálculos! </li>
+                            </ul>
+                        <button class="uk-button uk-button-default" id="btProsseguirUnidade">Prosseguir</button>
+                    </div>
+                    <!---Tela de seleção da Quantidade de placas-->
+                    <div id="telaSelectQuantidadePlaca" class="uk-hidden">
+                        <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+                            <li><a href="#">Uma</a></li>
+                            <li><a href="#">Duas</a></li>
+                        </ul>
+                        <ul class="uk-switcher uk-margin">
+                            <li>O cálculo será para apenas uma placa.</li>
+                            <li>O cálculo será para duas placas. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+    </body>
+</html>

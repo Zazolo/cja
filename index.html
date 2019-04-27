@@ -41,8 +41,8 @@
                     <!---Tela de seleção da Quantidade de placas-->
                     <div id="telaSelectQuantidadePlaca" class="uk-hidden">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-                            <li><a href="#">Uma</a></li>
-                            <li><a href="#">Duas</a></li>
+                            <li onclick="__set().qtdPlacas(1);"><a href="#">Uma</a></li>
+                            <li onclick="__set().qtdPlacas(2);"><a href="#">Duas</a></li>
                         </ul>
                         <ul class="uk-switcher uk-margin">
                             <li>O cálculo será para apenas uma placa.</li>
@@ -51,6 +51,7 @@
                         <button class="uk-button uk-button-default" id="btProsseguirDiametroParafuso">Prosseguir</button>
                     </div>
                     <div id="telaDiametroParafuso" class="uk-hidden">
+
                         <div class="uk-margin uk-hidden" id="dmParafusoM">
                             <label class="uk-form-label" for="form-horizontal-select">Select</label>
                             <div class="uk-form-controls">
@@ -78,7 +79,7 @@
                                     <option value="72">72mm</option>
                                     <option value="80">80mm</option>
                                     <option value="90">90mm</option>
-                                    <option value="100">110mm;</option>
+                                    <option value="100">110mm</option>
                                 </select>
                             </div>
                         </div>
@@ -112,7 +113,60 @@
                                 </select>
                             </div>
                         </div>
-                        <button class="uk-button uk-button-default" id="btProsseguirDiametroParafuso">Prosseguir</button>
+                        <button class="uk-button uk-button-default" id="btProsseguirSelecaoPlacas">Prosseguir</button>
+                    </div>
+                    <div id="telaSelecaoPlacas" class="uk-hidden">
+                        <label class="uk-form-label" for="input-espessura-placa-1">Espessura da placa 1</label>
+                        <input class="uk-input" placeholder="valor" id="input-espessura-placa-1">
+                        <div class="uk-hidden" id="selectPlacasPlaca1m">
+                            <label class="uk-form-label" for="select-placa-m-t1">Material da placa 1 (metro)</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="select-placa-m-t1">
+                                    <option value="207">Aço - 207GPa</option>
+                                    <option value="71">Alumínio - 71GPa</option>
+                                    <option value="119">Cobre - 119GPa</option>
+                                    <option value="100">Ferro Fundido Cinza - 100GPa</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+
+                        <div class="uk-hidden" id="selectPlacasPlaca1in">
+                            <label class="uk-form-label" for="select-placa-in-t1">Material da placa 1 (polegada)</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="select-placa-in-t1">
+                                    <option value="30">Aço - 30Mpsi</option>
+                                    <option value="10.3">Alumínio - 10,3Mpsi</option>
+                                    <option value="17.3">Cobre - 17,3Mpsi</option>
+                                    <option value="14.5">Ferro Fundido Cinza - 14,5Mpsi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="uk-form-label" for="input-espessura-placa-2">Espessura da placa 2</label>
+                        <input class="uk-input" placeholder="valor" id="input-espessura-placa-2">
+                        <div class="uk-hidden" id="selectPlacasPlaca2m">
+                            <label class="uk-form-label" for="select-placa-m-t2">Material da placa 2 (metro)</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="select-placa-m-t2">
+                                    <option value="207">Aço - 207GPa</option>
+                                    <option value="71">Alumínio - 71GPa</option>
+                                    <option value="119">Cobre - 119GPa</option>
+                                    <option value="100">Ferro Fundido Cinza - 100GPa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="uk-hidden" id="selectPlacasPlaca2in">
+                            <label class="uk-form-label" for="select-placa-in-t2">Material da placa 2 (polegada)</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="select-placa-in-t2">
+                                    <option value="30">Aço - 30Mpsi</option>
+                                    <option value="10.3">Alumínio - 10,3Mpsi</option>
+                                    <option value="17.3">Cobre - 17,3Mpsi</option>
+                                    <option value="14.5">Ferro Fundido Cinza - 14,5Mpsi</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,24 +1,83 @@
  //---> cálculo do primeiro campo;
  let placa = {
     descricao:'',
-    espessura:'',
+    espessura:0.0,
 }
 
-let arroela = {
-    m:{ N:'', R:'', W:''},
-    in: {N:'', R:'', W:''}
+
+let parafuso = { 
+    m:[
+        {
+         At:'',
+         wParafuso:'',
+         wPorca:['','',''],
+         arroela:['','',''],
+         DF:''   
+        }
+    ],
+    in: [
+        {
+            At: '',
+            wParafuso:'',
+            wPorca:'',
+            arroela:'',
+            DF:''
+        }
+    ]
 }
 
-let porca = {
-    m:'',
-    in: ''
-}
+let arroela;
+let porca;
+
+
+let tdp_in = [
+    "0.0600" = {
+        At = "0.0318",
+        wParafuso = "0.4375",
+        hPorca = "0.21875",
+        arroela = [
+            "0.065",
+            "0.065"
+        ],
+        furo = "0.28125"         
+    }
+];
+
+let tdp_m = [
+    "5" = {
+        estilo = [
+            1 = {
+                hPorca = "",
+                wPorca = ""
+            },
+            1 = {
+                hPorca = "",
+                wPorca = ""
+            },
+            null
+        ]
+    },
+
+    "42" = {
+        estilo = [
+            null,
+            null,
+            3 = {
+                hPorca = "",
+                wPorca = ""
+            }
+        ]
+    }
+];
+
+
 
 let calculo = {
     unidade: '',
     diametro:'',
     AreaRosqueada: '',
-    placa:[placa],
+    qtdPlacas:1,
+    placa:[0, 1],
     arroela:[arroela],
     porca: porca
 }

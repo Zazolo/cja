@@ -30,47 +30,49 @@ let arroela;
 let porca;
 
 
+////---> EDITA AQUI EM BAIXO ESSAS TABELAS! rs;
 let tdp_in = [
-    "0.0600" = {
-        At = "0.0318",
-        wParafuso = "0.4375",
-        hPorca = "0.21875",
-        arroela = [
+    {
+        diametro : "0.0600",
+        At : "0.0318",
+        wParafuso : "0.4375",
+        hPorca : "0.21875",
+        arroela : [
             "0.065",
             "0.065"
         ],
-        furo = "0.28125"         
+        furo : "0.28125"         
     }
 ];
 
 let tdp_m = [
-    "5" = {
-        estilo = [
-            1 = {
-                hPorca = "",
-                wPorca = ""
+    {
+        diametro : "5",
+        estilo : [
+            {
+                hPorca : "",
+                wPorca : ""
             },
-            1 = {
-                hPorca = "",
-                wPorca = ""
+            {
+                hPorca : "",
+                wPorca : ""
             },
             null
         ]
     },
 
-    "42" = {
-        estilo = [
+    {
+        diametro : "42",
+        estilo : [
             null,
             null,
-            3 = {
-                hPorca = "",
-                wPorca = ""
+            {
+                hPorca : "",
+                wPorca : ""
             }
         ]
     }
 ];
-
-
 
 let calculo = {
     unidade: '',

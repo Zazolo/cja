@@ -5,7 +5,6 @@ window.addEventListener("load", function () {
     //--> presets iniciais;
     __set().unidade('m');
 
-    
 
 
     document.getElementById("btIniciar").addEventListener("click", function (event) {
@@ -66,7 +65,15 @@ window.addEventListener("load", function () {
 
     });
 
-
+    /*
+    Listeners da seleção do diâmetro do para parafuso;
+    */
+    document.getElementById("select-diametro-parafuso-m").addEventListener("change", function(event) {
+        __set().diamParafuso($("#select-diametro-parafuso-m").val());
+    });
+    document.getElementById("select-diametro-parafuso-in").addEventListener("change", function(event) {
+        __set().diamParafuso($("#select-diametro-parafuso-in").val());
+    });
 
     /*
     Listeners da seleção do tipo de material usado nas placas;
@@ -94,7 +101,26 @@ window.addEventListener("load", function () {
     document.getElementById("input-espessura-placa-2").addEventListener("keyup", function(event) {
         __set().setEspessuraPlaca(2, $("#input-espessura-placa-2").val());
     });
-});
+
+
+    document.getElementById("btProsseguirSelecaoPlacas").addEventListener("click", function(event) {
+
+        __trocaSubDisplay("Selecione a quantidade de arruelas.");
+        __showHide("telaSelecaoPlacas");
+        __showHide("telaSelecaoQtdArroelas");
+        
+    });
+
+    document.getElementById("btProsseguirTipoArruela").addEventListener("click", function(event) {
+        if((calculo.diametro > 36) && (calculo.unidade == 'm')){
+            alert("Não é possível realizar o cálculo para arruela com o tamanho e unidade selecionados. Verifique e tente novamente!");
+        } else {
+            __trocaSubDisplay("Selecione o tipo da arruela");
+            __showHide("telaSelecaoTipoArruela");
+            __showHide("telaSelecaoQtdArroelas");
+        }
+        console.log("clicked");
+    });
 
 function __showHide(elemento){
     var el = document.getElementById(elemento);
@@ -119,6 +145,10 @@ function __set(){
             calculo.unidade = un;
             console.log('Unidade de cálculos alterada para ' + un);
         },
+        diamParafuso: (tam) => {
+            calculo.diametro = tam;
+            console.log('Diâmetro selecionado ' + calculo.diametro);
+        },
         qtdPlacas: (quantidade) => {
             calculo.qtdPlacas = quantidade; 
             console.log('Quantidade de placas alterada para ' + calculo.qtdPlacas);
@@ -138,10 +168,19 @@ function __set(){
             };
             console.log("PLACA: " + p + " espessura: " + espessura );
         },
-        setWPorca(estilo){
+        setWPorca : (estilo) => {
             calculo.porca.estilo = estilo;
             console.log("Estilo recebido: " + estilo);
             
+        },
+        setQtdArroela : (qtdArruela, posArruela) => {
+            calculo.qtdArruelas = qtdArruela;
+            calculo.posArruela = posArruela;
+            console.log("QUANTIDADE Arruela: " + calculo.qtdArruelas + " posição: " + calculo.posArruela );
+        },
+        setTipoArruela : (valor) => {
+            calculo.tipoArruela = valor;
+            console.log("Tipo da arruela:" + calculo.tipoArruela );
         }
     }
 }

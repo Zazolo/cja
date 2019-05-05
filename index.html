@@ -18,15 +18,17 @@
         <br>
         <div class="uk-child-width-expand@s uk-text-center" uk-grid>
             <div></div>
-            <div>
+            <div class="uk-width-xxlarge">
                 <div class="uk-card uk-card-default uk-card-body uk-width-xxlarge">
                     <h1 class="uk-heading-medium" id="displayInfoTitle">Bem-vindo(a) ao CJA</h1>
                     <h3 class="uk-card-title" id="displayInfoSubTitle">Cálculo de Junta Aparafusada</h3>
-                    <!---Tela de introdução-->
+                    
+                    <!-----Divisor de tela----->
                     <div id="telaIntro">
                         <button class="uk-button uk-button-default" id="btIniciar">Iniciar</button>
                     </div>
-                    <!---Tela de seleção da unidade métrica-->
+                    
+                    <!-----Divisor de tela----->
                     <div id="telaSelectUnidade" class="uk-hidden">
                             <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                                 <li onclick="__set().unidade('m');"><a href="#">Métrica</a></li>
@@ -38,7 +40,8 @@
                             </ul>
                         <button class="uk-button uk-button-default" id="btProsseguirUnidade">Prosseguir</button>
                     </div>
-                    <!---Tela de seleção da Quantidade de placas-->
+                    
+                    <!-----Divisor de tela----->
                     <div id="telaSelectQuantidadePlaca" class="uk-hidden">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                             <li onclick="__set().qtdPlacas(1);"><a href="#">Uma</a></li>
@@ -50,6 +53,8 @@
                         </ul>
                         <button class="uk-button uk-button-default" id="btProsseguirDiametroParafuso">Prosseguir</button>
                     </div>
+
+                    <!-----Divisor de tela----->
                     <div id="telaDiametroParafuso" class="uk-hidden">
 
                         <div class="uk-margin uk-hidden" id="dmParafusoM">
@@ -101,6 +106,8 @@
                         </div>
                         <button class="uk-button uk-button-default" id="btProsseguirSelecaoPlacas">Prosseguir</button>
                     </div>
+
+                    <!-----Divisor de tela----->
                     <div id="telaSelecaoPlacas" class="uk-hidden">
                         <label class="uk-form-label" for="input-espessura-placa-1">Espessura da placa 1</label>
                         <input class="uk-input" placeholder="valor" id="input-espessura-placa-1">
@@ -129,8 +136,12 @@
                                 </select>
                             </div>
                         </div>
-                        <label class="uk-form-label" for="input-espessura-placa-2">Espessura da placa 2</label>
-                        <input class="uk-input" placeholder="valor" id="input-espessura-placa-2">
+
+                        <div class="uk-hidden" id="selectPlacasInputLabel2">
+                            <label class="uk-form-label" for="input-espessura-placa-2">Espessura da placa 2</label>
+                            <input class="uk-input" placeholder="valor" id="input-espessura-placa-2">
+                        </div>
+
                         <div class="uk-hidden" id="selectPlacasPlaca2m">
                             <label class="uk-form-label" for="select-placa-m-t2">Material da placa 2 (metro)</label>
                             <div class="uk-form-controls">
@@ -155,6 +166,8 @@
                         </div>
                         <button class="uk-button uk-button-default" id="btProsseguirQuantidadeArroela">Prosseguir</button>
                     </div>
+
+                    <!-----Divisor de tela----->
                     <div id="telaSelecaoQtdArroelas" class="uk-hidden">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                             <li onclick="__set().setQtdArroela(0, 'nenhuma');"><a href="#">Nenhuma</a></li><br>
@@ -178,14 +191,39 @@
 
                         <button class="uk-button uk-button-default" id="btProsseguirTipoArruela">Prosseguir</button>
                     </div>
+
+                    <!-----Divisor de tela----->
                     <div id="telaSelecaoTipoArruela" class="uk-hidden">
-                        <label class="uk-form-label" for="select-placa-in-tss2">Material da placa 2 (polegada)</label>
+                        <label class="uk-form-label" for="select-tipo-arruela">Selecione</label>
                         <div class="uk-form-controls">
-                            <select class="uk-select" id="select-placa-in-tss2">
+                            <select class="uk-select" id="select-tipo-arruela">
                              
                                 
                             </select>
                         </div>
+                        <button class="uk-button uk-button-default" id="btProsseguirTipoPorca">Prosseguir</button>
+                    </div>
+
+                    <!-----Divisor de tela----->
+                    <div id="telaSelecaoTipoPorca" class="uk-hidden">
+
+                        <div class="uk-form-controls uk-hidden" id="container-select-tipo-porca">
+                            <select class="uk-select" id="select-tipo-porca">
+                             
+                                
+                            </select>
+                        </div>
+
+                        <div class="uk-hidden" id="container-info-tipo-porca">
+
+                            <label class="uk-form-label" id="label-info-tipo-porca">
+                                Exibindo?
+                            </label>
+                        </div>
+
+
+
+
                     </div>
                 </div>
             </div>

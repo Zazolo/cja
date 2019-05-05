@@ -1,5 +1,3 @@
-
-
 window.addEventListener("load", function () {
 
     //--> presets iniciais;
@@ -51,6 +49,7 @@ window.addEventListener("load", function () {
             break;
 
             case 2:
+                __showHide("selectPlacasInputLabel2");
                 if (calculo.unidade == 'm'){
                     __showHide("selectPlacasPlaca1m");
                     __showHide("selectPlacasPlaca2m");
@@ -68,10 +67,10 @@ window.addEventListener("load", function () {
     /*
     Listeners da seleção do diâmetro do para parafuso;
     */
-    document.getElementById("select-diametro-parafuso-m").addEventListener("change", function(event) {
+    document.getElementById("select-diametro-parafuso-m").addEventListener("change", function() {
         __set().diamParafuso($("#select-diametro-parafuso-m").val());
     });
-    document.getElementById("select-diametro-parafuso-in").addEventListener("change", function(event) {
+    document.getElementById("select-diametro-parafuso-in").addEventListener("change", function() {
         __set().diamParafuso($("#select-diametro-parafuso-in").val());
     });
 
@@ -103,7 +102,7 @@ window.addEventListener("load", function () {
     });
 
 
-    document.getElementById("btProsseguirSelecaoPlacas").addEventListener("click", function(event) {
+    document.getElementById("btProsseguirQuantidadeArroela").addEventListener("click", function(event) {
 
         __trocaSubDisplay("Selecione a quantidade de arruelas.");
         __showHide("telaSelecaoPlacas");
@@ -111,16 +110,96 @@ window.addEventListener("load", function () {
         
     });
 
-    document.getElementById("btProsseguirTipoArruela").addEventListener("click", function(event) {
-        if((calculo.diametro > 36) && (calculo.unidade == 'm')){
+
+
+    document.getElementById("btProsseguirTipoArruela").addEventListener("click", function() {
+        if((calculo.diametro > 36) && (calculo.unidade == 'm') && (calculo.posArruela != 'nenhuma')){
             alert("Não é possível realizar o cálculo para arruela com o tamanho e unidade selecionados. Verifique e tente novamente!");
         } else {
+
+            
             __trocaSubDisplay("Selecione o tipo da arruela");
             __showHide("telaSelecaoTipoArruela");
             __showHide("telaSelecaoQtdArroelas");
+
+            $("#select-tipo-arruela").empty();
+
+            if(calculo.posArruela == 'nenhuma'){
+                $("#btProsseguirTipoPorca").click();
+            }
+            
+            switch (calculo.unidade){
+                case 'm':
+                    for(let i = 0; i<tdp_m.length; i++){
+                        if(calculo.diametro == tdp_m[i].diametro){
+                            for(let j = 0; j < tdp_m[i].arruela.length; j++){
+                                if(tdp_m[i].arruela[j] != null){
+                                    $("#select-tipo-arruela").append("<option value='" + tdp_m[i].arruela[j] + "'>"+tdp_m[i].arruela[j]+"mm</option>");
+                                }
+                            }
+                        }
+                    }
+                break;
+                case 'in':
+                    for(let i = 0; i<tdp_in.length; i++){
+                        if(calculo.diametro == tdp_in[i].diametro){
+                            for(let j = 0; j < tdp_in[i].arruela.length; j++){
+                                if(tdp_in[i].arruela[j] != null){
+                                    $("#select-tipo-arruela").append("<option value='" + tdp_in[i].arruela[j] + "'>"+tdp_in[i].arruela[j]+"in</option>");
+                                }
+                            }
+                        }
+                    }
+                break;
+            }
+
         }
-        console.log("clicked");
     });
+
+    document.getElementById("select-tipo-arruela").addEventListener("keyup", function(event) {
+        __set().setTipoArruela($("#select-tipo-arruela").val());
+    });
+
+    document.getElementById("btProsseguirTipoPorca").addEventListener("click", function(event) {
+        __showHide("telaSelecaoTipoArruela");
+        __showHide("telaSelecaoTipoPorca");
+        switch(calculo.unidade){
+            case 'm':
+                __trocaSubDisplay("Selecione o tipo de porca a ser utilizado.");  
+                __showHide("container-select-tipo-porca");
+
+                for(let i = 0; i<tdp_m.length; i++){
+                    if(calculo.diametro == tdp_m[i].diametro){
+                        for(let j = 0; j < tdp_m[i].estilo.length; j++){
+                            if(tdp_m[i].estilo[j] != null){
+                                $("#select-tipo-porca").append("<option data-porca='" + JSON.stringify(tdp_m[i].estilo[j]) + "'>W:"+tdp_m[i].estilo[j].wPorca+"/H:"+tdp_m[i].estilo[j].hPorca+"</option>");
+                            }
+                        }
+                    }
+                }
+            break;
+            case 'in':
+                __trocaSubDisplay("Confira os dados pré-selecionados na tabela padrão.");
+                __showHide("container-info-tipo-porca");
+
+                for(let i = 0; i<tdp_in.length; i++){
+                    if(calculo.diametro == tdp_in[i].diametro){
+                        console.log("Encontrou: " + "H: " + tdp_in[i].hPorca + " | W: " + tdp_in[i].hPorca);
+                        $("#label-info-tipo-porca").text("H: " + tdp_in[i].hPorca + "\nW: " + tdp_in[i].hPorca);
+                    }
+                }
+            break;
+           
+
+
+        }
+    });
+
+    document.getElementById("select-tipo-porca").addEventListener("change", function(event) {
+        __set().setPorca($("#select-tipo-porca").find(':selected').data('porca'));
+    });
+
+});
 
 function __showHide(elemento){
     var el = document.getElementById(elemento);
@@ -168,10 +247,9 @@ function __set(){
             };
             console.log("PLACA: " + p + " espessura: " + espessura );
         },
-        setWPorca : (estilo) => {
-            calculo.porca.estilo = estilo;
-            console.log("Estilo recebido: " + estilo);
-            
+        setPorca : (estilo) => {
+            calculo.porca = estilo;
+            console.log("Estilo recebido: W:" + calculo.porca.wPorca + " H:" + calculo.porca.hPorca);
         },
         setQtdArroela : (qtdArruela, posArruela) => {
             calculo.qtdArruelas = qtdArruela;
@@ -184,3 +262,4 @@ function __set(){
         }
     }
 }
+

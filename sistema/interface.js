@@ -69,6 +69,26 @@ window.addEventListener("load", function () {
     */
     document.getElementById("select-diametro-parafuso-m").addEventListener("change", function() {
         __set().diamParafuso($("#select-diametro-parafuso-m").val());
+
+
+        //-->Seleciona a area rosqueada de acordo com a tabela.
+
+        switch(calculo.unidade){
+            case 'm':
+                for(let i = 0; i < tdp_m.length; i++){
+                    if(tdp_m[i].diametro == calculo.diametro) {
+                        __set().setAt(tdp_m[i].At);
+                    }
+                }
+            break;
+            case 'in':
+                for(let i = 0; i < tdp_in.length; i++){
+                    if(tdp_in[i].diametro == calculo.diametro) {
+                        __set().setAt(tdp_in[i].At);
+                    }
+                }
+            break;
+        }
     });
     document.getElementById("select-diametro-parafuso-in").addEventListener("change", function() {
         __set().diamParafuso($("#select-diametro-parafuso-in").val());
@@ -172,7 +192,7 @@ window.addEventListener("load", function () {
                     if(calculo.diametro == tdp_m[i].diametro){
                         for(let j = 0; j < tdp_m[i].estilo.length; j++){
                             if(tdp_m[i].estilo[j] != null){
-                                $("#select-tipo-porca").append("<option data-porca='" + JSON.stringify(tdp_m[i].estilo[j]) + "'>W:"+tdp_m[i].estilo[j].wPorca+"/H:"+tdp_m[i].estilo[j].hPorca+"</option>");
+                                $("#select-tipo-porca").append("<option data-porca='" + JSON.stringify(tdp_m[i].estilo[j]) + "'>Estilo "+(j+1)+" -> W:"+tdp_m[i].estilo[j].wPorca+"/H:"+tdp_m[i].estilo[j].hPorca+"</option>");
                             }
                         }
                     }
@@ -198,6 +218,17 @@ window.addEventListener("load", function () {
     document.getElementById("select-tipo-porca").addEventListener("change", function(event) {
         __set().setPorca($("#select-tipo-porca").find(':selected').data('porca'));
     });
+
+    document.getElementById("btProsseguirCalculoFinal").addEventListener("click", function(event) {
+
+        __trocaSubDisplay("Selecione a quantidade de arruelas.");
+        __showHide("telaCalculoFinal");
+        __showHide("telaSelecaoTipoPorca");
+
+        alert(calcTamanhoParafuso(calculo));
+        
+    });
+
 
 });
 
@@ -227,6 +258,10 @@ function __set(){
         diamParafuso: (tam) => {
             calculo.diametro = tam;
             console.log('Diâmetro selecionado ' + calculo.diametro);
+        },
+        setAt: (at) => {
+            calculo.AreaRosqueada = at;
+            console.log('Area Rosqueada: ' + calculo.AreaRosqueada);
         },
         qtdPlacas: (quantidade) => {
             calculo.qtdPlacas = quantidade; 
@@ -258,6 +293,14 @@ function __set(){
         },
         setTipoArruela : (valor) => {
             calculo.tipoArruela = valor;
+            
+            //--->Verificar com o Luccas;
+
+            if(calculo.posArruela = 'ambos'){
+                console.log("Duas arruelas serão utilizadas, portanto o valor será multiplicado.");
+                calculo.tipoArruela += calculo.tipoArruela;
+            }
+
             console.log("Tipo da arruela:" + calculo.tipoArruela );
         }
     }

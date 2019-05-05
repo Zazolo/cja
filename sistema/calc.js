@@ -656,32 +656,22 @@ let calculo = {
     qtdPlacas:1,
     qtdArruelas:1,
     posArruela:'cabeca',
-    tipoArruela:'valor?',
+    tipoArruela:'', //--->Valor total de Arruela;
     placa:[0, 1],
     porca: {wPorca: '', hPorca: ''}
 }
 
-function calcTamanhoParafuso(calculo){
+function calcTamanhoParafuso(calculo){ ///-----------------------------------------------------Retorna L;
     let totalPlaca = 0;
     let totalArruela = 0;
     let L;
     for(let i; i < calculo.placa.length; i++){
-        totalPlaca += calculo.placa[i];
+        totalPlaca += calculo.placa[i].espessura;
     }
 
-    for(let j; j < calculo.placa.length; j++){
-        totalArruela += calculo.arruela[j].espessura;
-    }
+    totalArruela = calculo.tipoArruela;
+    L = totalPlaca + totalArruela + calculo.porca.hPorca;
 
-    switch(calculo.unidade){
-        case 'm':
-            L = totalPlaca + totalArruela + calculo.porca.m;
-        break;
-        case 'in':
-            L = totalPlaca + totalArruela + calculo.porca.in;
-        break;
-    }
-    
     return L;
 }
 
@@ -728,6 +718,7 @@ function calcCompPorUtilRosqueavel(calculo){
 
 function calcTamParafusoMenosPorca(calculo){
     let l = 0;
+    console.log("Calculando a Diferença entre Parafuso-Porca...");
     switch(calculo.unidade){
         case 'm':
             l= calcTamanhoParafuso(calculo) - calculo.porca.m;
@@ -741,6 +732,7 @@ function calcTamParafusoMenosPorca(calculo){
 
 function calcAreaPorUtilNaoRosqueada(calculo){
     const PI = Math.PI;
+    console.log("Calculando a Area Util Não Rosqueada...");
     return Ad = (PI* Math.pow(calculo.diametro, 2)) / 4;
 }
 
@@ -748,6 +740,7 @@ function calcAreaPorUtilNaoRosqueada(calculo){
 function calcRigidez(calculo){
     let At = calculo.AreaRosqueada;
     let E;
+    console.log("Calculando a rigidez...");
     switch(calculo.unidade){
         case 'm':
             E = 207;

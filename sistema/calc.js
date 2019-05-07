@@ -665,11 +665,11 @@ function calcTamanhoParafuso(calculo){ ///--------------------------------------
     let totalPlaca = 0;
     let totalArruela = 0;
     let L;
-    for(let i; i < calculo.placa.length; i++){
-        totalPlaca += calculo.placa[i].espessura;
+    for(let i=0; i < calculo.placa.length; i++){
+        totalPlaca += Number(calculo.placa[i].espessura);
     }
 
-    totalArruela = calculo.tipoArruela;
+    totalArruela = Number(calculo.tipoArruela);
     L = totalPlaca + totalArruela + calculo.porca.hPorca;
 
     return L;
@@ -696,10 +696,10 @@ function calcComprimentoRosqueado(calculo){
         case 'in':
             switch(L){
                 case L<=6:
-                    Lt = 2+calculo.diametro + (1/4);
+                    Lt = 2*calculo.diametro + 0.25;
                 break;
                 case L>6:
-                    Lt = 2+calculo.diametro + (1/2);
+                    Lt = 2*calculo.diametro + 0.50;
                 break;
             }
         break;
@@ -721,10 +721,10 @@ function calcTamParafusoMenosPorca(calculo){
     console.log("Calculando a Diferença entre Parafuso-Porca...");
     switch(calculo.unidade){
         case 'm':
-            l= calcTamanhoParafuso(calculo) - calculo.porca.m;
+            l= calcTamanhoParafuso(calculo) - calculo.hPorca;
         break;
         case 'in':
-            l = calcTamanhoParafuso(calculo) - calculo.porca.in;
+            l = calcTamanhoParafuso(calculo) - calculo.hPorca;
         break;
     }
     return l;    

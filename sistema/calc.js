@@ -710,14 +710,17 @@ function calcComprimentoRosqueado(calculo){
         break;
 
     }
+    console.log("Comprimento rosqueado: " + Lt);
     return Lt;
 }
 
 function calcCompPorUtil_N_Rosqueavel(calculo){
     console.log("Calculando o comprimento da porção útil NÃO rosqueável...");
     let L = calcTamanhoParafuso(calculo);
-    let Lt =  calcComprimentoRosqueado(calculo);
-    return L - Lt;
+    let Lt = calcComprimentoRosqueado(calculo);
+    Ld = L - Lt;
+    console.log("Comprimento útil não rosqueável: " + Ld);
+    return Ld;
 }
 
 function calcTamParafusoMenosPorca(calculo){
@@ -728,6 +731,8 @@ function calcTamParafusoMenosPorca(calculo){
     //console.log("hP: " + hP);
 
     let r = L - hP;
+
+    console.log("Parafuso menos porca: " + r);
     return r;
 }
 
@@ -770,6 +775,16 @@ function calcRigidez(calculo){
     console.log("Area rosqueável: " + AreaRosqueavel);
     console.log("Area não rosqueável: " + AreaNaoRosqueavel);
     console.log("E: " + E);
-    let Kb = (calcAreaPorUtilNaoRosqueada(calculo) * At * E) / ((calcAreaPorUtilNaoRosqueada(calculo) * calcCompPorUtilRosqueavel(calculo)) + (At + calcCompPorUtil_N_Rosqueavel(calculo)));
+    let Kb = (calcAreaPorUtilNaoRosqueada(calculo) * At * E) / ((calcAreaPorUtilNaoRosqueada(calculo) * calcCompPorUtilRosqueavel(calculo)) + (At * calcCompPorUtil_N_Rosqueavel(calculo)));
     return Kb;
+}
+
+function calcRigidezMembros(calculo){
+    let quantidade_arruelas = 0;
+    let quantidade_placas = 0;
+    let posicao_arruelas = 'nenhuma';
+
+    //pegar os valores iniciais necessário para a conta;
+    
+
 }

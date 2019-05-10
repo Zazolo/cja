@@ -72,26 +72,20 @@ window.addEventListener("load", function () {
 
 
         //-->Seleciona a area rosqueada de acordo com a tabela.
-
-        switch(calculo.unidade){
-            case 'm':
-                for(let i = 0; i < tdp_m.length; i++){
-                    if(tdp_m[i].diametro == calculo.diametro) {
-                        __set().setAt(tdp_m[i].At);
-                    }
-                }
-            break;
-            case 'in':
-                for(let i = 0; i < tdp_in.length; i++){
-                    if(tdp_in[i].diametro == calculo.diametro) {
-                        __set().setAt(tdp_in[i].At);
-                    }
-                }
-            break;
+        for(let i = 0; i < tdp_m.length; i++){
+            if(tdp_m[i].diametro == calculo.diametro) {
+                __set().setAt(tdp_m[i].At);
+            }
         }
     });
     document.getElementById("select-diametro-parafuso-in").addEventListener("change", function() {
         __set().diamParafuso($("#select-diametro-parafuso-in").val());
+        for(let j = 0; j < tdp_in.length; j++){
+            if(tdp_in[j].diametro == calculo.diametro) {
+                console.log("Achou a área rosqueada");
+                __set().setAt(tdp_in[j].At);
+            }
+        }
     });
 
     /*

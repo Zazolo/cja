@@ -656,9 +656,9 @@ let calculo = {
     qtdPlacas:1,
     qtdArruelas:1,
     posArruela:'cabeca',
-    tipoArruela:'', //--->Valor total de Arruela;
-    placa:[0, 1],
-    porca: {wPorca: '', hPorca: ''}
+    tipoArruela:'0', //--->Valor total de Arruela;
+    placa:[{tipo:'0', espessura:'0'}, {tipo:'0', espessura:'0'}],
+    porca: {wPorca: '0', hPorca: '0'}
 }
 
 function calcTamanhoParafuso(calculo){ ///-----------------------------------------------------Retorna L;
@@ -666,41 +666,46 @@ function calcTamanhoParafuso(calculo){ ///--------------------------------------
     let totalArruela = 0;
     let L;
     for(let i=0; i < calculo.placa.length; i++){
-        totalPlaca += Number(calculo.placa[i].espessura);
+        totalPlaca += parseInt(calculo.placa[i].espessura);
     }
 
-    totalArruela = Number(calculo.tipoArruela);
-    L = totalPlaca + totalArruela + calculo.porca.hPorca;
+    totalArruela = parseFloat(calculo.tipoArruela);
+    console.log("TOTAL_ARRUELA: " + totalArruela);
+    console.log("TOTAL_PLACA: " + totalPlaca);
+    console.log("TOTAL_hPorca: " + calculo.porca.hPorca);
+    L = totalPlaca + totalArruela + parseFloat(calculo.porca.hPorca);
 
     return L;
 }
 
 function calcComprimentoRosqueado(calculo){
     let Lt = 0;
-    let L = calcTamanhoParafuso(calculo);
+    let L = parseFloat(calcTamanhoParafuso(calculo));
     console.log("O sistema está calculando o Comprimento Rosqueado...");
     switch(calculo.unidade){
         case 'm':
-            switch(L){
-                case L<=125:
-                    Lt = 2*calculo.diametro + 6;
-                break;
-                case 125>L<=200:
-                    Lt = 2*calculo.diametro + 12;
-                break;
-                case L>200:
-                    Lt = 2*calculo.diametro + 25;
-                break;
+            console.log("Unidade métrica para calculo do comprimento Rosqueado...\nVALOR DE L: " + L);
+            if(L <= 125){
+                console.log("L menor que 125");
+                Lt = (2*parseFloat(calculo.diametro)) + 6;
+            } else {
+                if((L > 125)&&(L <= 200)){
+                    Lt = (2*parseFloat(calculo.diametro)) + 12;
+                } else {
+                    if(L > 200){
+                        Lt = (2*parseFloat(calculo.diametro)) + 25;
+                    }
+                }
             }
         break;
         case 'in':
-            switch(L){
-                case L<=6:
-                    Lt = 2*calculo.diametro + 0.25;
-                break;
-                case L>6:
-                    Lt = 2*calculo.diametro + 0.50;
-                break;
+            console.log("Polegada para calculo do comprimento Rosqueado...\n VALOR DE L: " + L);
+            if(L<=6){
+                Lt = 2*parseFloat(calculo.diametro) + 0.25;
+            } else {
+                if(L>6){
+                    Lt = 2*parseFloat(calculo.diametro) + 0.50;
+                }
             }
         break;
 
@@ -709,38 +714,46 @@ function calcComprimentoRosqueado(calculo){
 }
 
 function calcCompPorUtil_N_Rosqueavel(calculo){
-    return calcTamanhoParafuso(calculo) - calcComprimentoRosqueado(calculo);
-}
-
-function calcCompPorUtilRosqueavel(calculo){
-    return calcTamParafusoMenosPorca(calculo) - calcCompPorUtil_N_Rosqueavel(calculo);
+    console.log("Calculando o comprimento da porção útil NÃO rosqueável...");
+    let L = calcTamanhoParafuso(calculo);
+    let Lt =  calcComprimentoRosqueado(calculo);
+    return L - Lt;
 }
 
 function calcTamParafusoMenosPorca(calculo){
-    let l = 0;
     console.log("Calculando a Diferença entre Parafuso-Porca...");
-    switch(calculo.unidade){
-        case 'm':
-            l= calcTamanhoParafuso(calculo) - calculo.hPorca;
-        break;
-        case 'in':
-            l = calcTamanhoParafuso(calculo) - calculo.hPorca;
-        break;
-    }
-    return l;    
+    let L = calcTamanhoParafuso(calculo);
+    //console.log("L: " + L);
+    let hP = parseFloat(calculo.porca.hPorca);
+    //console.log("hP: " + hP);
+
+    let r = L - hP;
+    return r;
+}
+
+function calcCompPorUtilRosqueavel(calculo){//-------;;;;
+    console.log("Calculando o comprimento da porção útil rosqueável...");
+    let PmP = calcTamParafusoMenosPorca(calculo);
+    //console.log("PmP: " + PmP);
+    let PUNR = calcCompPorUtil_N_Rosqueavel(calculo); 
+    //console.log("PUNR: " + PUNR);
+    let r = PmP - PUNR; 
+    return r;
 }
 
 function calcAreaPorUtilNaoRosqueada(calculo){
     const PI = Math.PI;
     console.log("Calculando a Area Util Não Rosqueada...");
-    return Ad = (PI* Math.pow(calculo.diametro, 2)) / 4;
+    let Ad = (PI* Math.pow(calculo.diametro, 2)) / 4;
+    return Ad;
 }
 
 
 function calcRigidez(calculo){
-    let At = calculo.AreaRosqueada;
-    let E;
     console.log("Calculando a rigidez...");
+    let At = parseFloat(calculo.AreaRosqueada);
+    let E = 0;
+    console.log("Area Rosqueada: " + At);
     switch(calculo.unidade){
         case 'm':
             E = 207;
@@ -749,6 +762,14 @@ function calcRigidez(calculo){
             E = 30;
         break;
     }
+    
+    let AreaRosqueavel = calcCompPorUtilRosqueavel(calculo);
+    let AreaNaoRosqueada = calcAreaPorUtilNaoRosqueada(calculo);
+    let AreaNaoRosqueavel = calcCompPorUtil_N_Rosqueavel(calculo);
+    console.log("Area não rosqueada: " + AreaNaoRosqueada);
+    console.log("Area rosqueável: " + AreaRosqueavel);
+    console.log("Area não rosqueável: " + AreaNaoRosqueavel);
+    console.log("E: " + E);
     let Kb = (calcAreaPorUtilNaoRosqueada(calculo) * At * E) / ((calcAreaPorUtilNaoRosqueada(calculo) * calcCompPorUtilRosqueavel(calculo)) + (At + calcCompPorUtil_N_Rosqueavel(calculo)));
     return Kb;
 }

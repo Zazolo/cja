@@ -165,6 +165,7 @@ window.addEventListener("load", function () {
                         if(calculo.diametro == tdp_in[i].diametro){
                             for(let j = 0; j < tdp_in[i].arruela.length; j++){
                                 if(tdp_in[i].arruela[j] != null){
+                                    console.log("APPENDING to SELECT (tipo_arruela): " + tdp_in[i].arruela[j]);
                                     $("#select-tipo-arruela").append("<option value='" + tdp_in[i].arruela[j] + "'>"+tdp_in[i].arruela[j]+"in</option>");
                                 }
                             }
@@ -176,8 +177,8 @@ window.addEventListener("load", function () {
         }
     });
 
-    document.getElementById("select-tipo-arruela").addEventListener("keyup", function(event) {
-        __set().setTipoArruela($("#select-tipo-arruela").val());
+    document.getElementById("select-tipo-arruela").addEventListener("change", function(event) {
+        __set().setTipoArruela(parseFloat($("#select-tipo-arruela").val()));
     });
 
     document.getElementById("btProsseguirTipoPorca").addEventListener("click", function(event) {
@@ -204,8 +205,10 @@ window.addEventListener("load", function () {
 
                 for(let i = 0; i<tdp_in.length; i++){
                     if(calculo.diametro == tdp_in[i].diametro){
-                        console.log("Encontrou: " + "H: " + tdp_in[i].hPorca + " | W: " + tdp_in[i].hPorca);
-                        $("#label-info-tipo-porca").text("H: " + tdp_in[i].hPorca + "\nW: " + tdp_in[i].hPorca);
+                        console.log("Encontrou: " + "H: " + tdp_in[i].hPorca + " | W: " + tdp_in[i].wPorca);
+                        $("#label-info-tipo-porca").text("H: " + tdp_in[i].hPorca + "\nW: " + tdp_in[i].wPorca);
+                        calculo.porca.hPorca = tdp_in[i].hPorca;
+                        calculo.porca.wPorca = tdp_in[i].wPorca;
                     }
                 }
             break;
@@ -225,7 +228,7 @@ window.addEventListener("load", function () {
         __showHide("telaCalculoFinal");
         __showHide("telaSelecaoTipoPorca");
 
-        alert(calcTamanhoParafuso(calculo));
+        alert("RIGIDEZ: " + calcRigidez(calculo));
         
     });
 
@@ -269,18 +272,14 @@ function __set(){
         },
         setTipoPlaca: (p, tipo) => {
             p -=1;
-            calculo.placa[p] = {
-                tipo: tipo
-            };
-            console.log("PLACA: " + p + " tipo: " + tipo );
+            calculo.placa[p].tipo = parseFloat(tipo);
+            console.log("PLACA: " + p + " tipo: " + calculo.placa[p].tipo );
         },
         setEspessuraPlaca: (p, espessura) => {
             p -=1;
             console.log("Recebendo a espessura: " + espessura);
-            calculo.placa[p] = {
-                espessura: espessura
-            };
-            console.log("PLACA: " + p + " espessura: " + espessura );
+            calculo.placa[p].espessura = parseFloat(espessura);
+            console.log("PLACA: " + p + " espessura: " + calculo.placa[p].espessura );
         },
         setPorca : (estilo) => {
             calculo.porca = estilo;
@@ -305,4 +304,6 @@ function __set(){
         }
     }
 }
+
+
 

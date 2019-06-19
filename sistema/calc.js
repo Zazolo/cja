@@ -787,4 +787,745 @@ function calcRigidezMembros(calculo){
     //pegar os valores iniciais necessário para a conta;
     
 
-}
+    function calcRigidezMembros(calculo){
+        let quantidade_arruelas = 0;
+        let quantidade_placas = 0;
+        let posicao_arruelas = 'nenhuma';
+    
+        //pegar os valores iniciais necessÃ¡rio para a conta;
+    
+        if(calculo.qtdPlacas === 1){
+            /*
+                                                            DÃ‰CIMA TERCEIRA POSSIBILIDADE 
+            */
+              if((calculo.posArruela == 'cabeca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+    
+                let t1 = parseFloat(calculo.tipoArruela);
+                let tt = parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.tipoArruela);
+                let t2 = (tt/2) - parseFloat(calculo.tipoArruela);
+                let t3 = tt/2;
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3);
+    
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let d3 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nd3: " + d3);
+    
+                /**
+                *C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                
+                
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3));
+              }
+    
+            /*
+                                                            DÃ‰CIMA QUARTA POSSIBILIDADE 
+            */
+              if((calculo.posArruela == 'porca') ){
+    
+                 /**
+                 * A) Calculando os valores de T;
+                 */
+                let tt = parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.tipoArruela);
+                let t1 = tt/2;
+                let t2 = (tt/2) - parseFloat(calculo.tipoArruela);
+                let t3 = parseFloat(calculo.tipoArruela);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2
+                + "\nt3: " + t3);
+    
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let d3 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nd3: " + d3);
+    
+                /**
+                *C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+              
+              
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3));
+              }
+    
+            /*
+                                                            DÃ‰CIMA QUINTA POSSIBILIDADE 
+            */
+              if((calculo.posArruela == 'ambos') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+         
+                let t1 = parseFloat(calculo.tipoArruela);
+                let t2 = (parseFloat(calculo.placa[0].espessura)/2);
+                let t3 = (parseFloat(calculo.placa[0].espessura)/2);
+                let t4 = parsetFloat(calculo.tipoArruela);
+               
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2
+                + "\nt3: " + t3 + "\nt4: " + t4);
+    
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d3 = parseFloat(calculo.wParafuso) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                * Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+               
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k3)+(1/k4));
+              }
+    
+            /*
+                                                            DÃ‰CIMA SEXTA POSSIBILIDADE 
+            */
+           console.log("VERIFICAR A POSIçÃO DA A ARRUELA SE 0 EQUIVALE A 'NENHUMA'");
+           console.log(calculo.posArruela);
+              if((calculo.posArruela == '0') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+                let t1 = (parseFloat(calculo.placa[0].espessura)/2);
+                let t2 = (parseFloat(calculo.placa[0].espessura)/2);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2);
+    
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let d2 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nd2: " + d2);
+    
+                /**
+                * Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+              
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3));
+              }        
+            
+        }
+    
+        if(calculo.qtdPlacas === 2){
+            /*
+                                                            PRIMEIRA POSSIBILIDADE 
+            */
+              
+              if((calculo.placa[0].espessura > calculo.placa[1].espessura) && (calculo.posArruela == 'cabeca') ){
+    
+                /**
+                 * A) Calculando os valores de T;
+                */
+                let t1 = parseFloat(calculo.tipoArruela);
+                let tt = t1 + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);
+                let t2 = (tt/2) - parseFloat(calculo.tipoArruela);
+                let t3 = parseFloat(calculo.placa[0].espessura) - t2;
+                let t4 = parseFloat(calculo.placa[1].espessura);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+                
+                /**
+                 * B) Calcular os valores de D;
+                */
+                
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*t1;
+                let d2 = d1 + (x2*2)
+                let x3 = 0.5774*t4;
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2
+                + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                 * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3+ "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+    
+            /*
+                                                            SEGUNDA POSSIBILIDADE 
+            */
+    
+              if((calculo.placa[0].espessura > calculo.placa[1].espessura) && (calculo.posArruela == 'porca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+                let tt = parseFloat(calculo.tipoArruela) + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);
+                let t1 = tt/2
+                let t2 = parseFloat(calculo.tipoArruela) - t1;
+                let t3 = parseFloat(calculo.placa[1].espessura);
+                let t4 = parseFloat(calculo.tipoArruela);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2
+                + "\nt3: " + t3 + "\nt4: " + t4);
+                
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*(parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.tipoArruela));
+                let d2 = parseFloat(calculo.porca.wPorca) + (x2*2);
+                let x3 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3+ "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+    
+            /*
+                                                            TERCEIRA POSSIBILIDADE 
+            */
+    
+              if((calculo.placa[0].espessura > calculo.placa[1].espessura) && (calculo.posArruela == 'ambos') ){
+                
+                /**
+                * A) Calculando os valores de T;
+                */
+                let t1 = parseFloat(calculo.tipoArruela)/2;
+                let tt = (parseFloat(calculo.tipoArruela)/2) + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura) + (parseFloat(calculo.tipoArruela)/2);
+                let t2 = tt/2 - (parseFloat(calculo.tipoArruela)/2);
+                let t3 = parseFloat(calculo.placa[0].espessura) - t2;
+                let t4 = parseFloat(calculo.placa[1].espessura);
+                let t5 = parseFloat(calculo.tipoArruela)/2
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4 + "\nt5: " + t5);
+               
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*(parseFloat(calculo.tipoArruela)/2);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*(t4 + (parseFloat(calculo.tipoArruela)/2));
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let x4 = 0.5774*(parseFloat(calculo.tipoArruela)/2);
+                let d4 = parseFloat(calculo.porca.wPorca) + (x4*2);
+                let d5 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4 + "\nd5: " + d5);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k5 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t5)+(d5-parseFloat(calculo.furo)))*(d5+parseFloat(calculo.furo))))/(((1.155*t5)+(d5+parseFloat(calculo.furo)))*(d5-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4 + "\nk5: " + k5);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4)+(1/k5));
+              }
+    
+            /*
+                                                            QUARTA POSSIBILIDADE 
+            */
+    
+              if((calculo.placa[0].espessura > calculo.placa[1].espessura) && (calculo.posArruela == '0') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+    
+                let tt = parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);
+                let t1 = tt/2;
+                let t2 = parseFloat(calculo.placa[0].espessura) - t1;
+                let t3 = parseFloat(calculo.placa[1].espessura);
+        
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3);
+            
+                /**
+                * B) Calcular os valores de D;
+                */
+            
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*t3;
+                let d2 = parseFloat(calculo.porca.wPorca) + (x2*2);
+                let d3 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nd3: " + d3);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3));
+              }
+    
+             /*
+                                                            QUINTA POSSIBILIDADE 
+             */
+    
+              if((calculo.placa[0].espessura < calculo.placa[1].espessura) && (calculo.posArruela == 'cabeca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+              
+                let t1 = parseFloat(calculo.tipoArruela);
+                let t2 = parseFloat(calculo.placa[0].espessura);
+                let tt = parseFloat(calculo.tipoArruela) + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);
+                let t3 = parseFloat(calculo.placa[1].espessura) - (tt/2);
+                let t4 = tt/2;
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+              
+                /**
+                * B) Calcular os valores de D;
+                */
+              
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*(t2 + parseFloat(calculo.tipoArruela));
+                let d3 = parseFloat(calculo.wParafuso) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+    
+             /*
+                                                            SEXTA POSSIBILIDADE 
+             */
+              
+              if((calculo.placa[0].espessura < calculo.placa[1].espessura) && (calculo.posArruela == 'porca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+                
+                let t1 =  parseFloat(calculo.placa[0].espessura);
+                let tt =  parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura) + parseFloat(calculo.tipoArruela);
+                let t2 = (tt/2) - parseFloat(calculo.placa[0].espessura);
+                let t3 = parseFloat(calculo.placa[1].espessura) - t2;
+                let t4 = parseFloat(calculo.tipoArruela);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+            
+                /**
+                * B) Calcular os valores de D;
+                */
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.placa[0].espessura);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*parseFloat(calculo.tipoArruela)/2;
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+             
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+            
+             /*
+                                                            SETIMA POSSIBILIDADE 
+             */
+           
+              if((calculo.placa[0].espessura < calculo.placa[1].espessura) && (calculo.posArruela == 'ambos') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+    
+                let t1 = (parseFloat(calculo.tipoArruela)/2);
+                let t2 = parseFloat(calculo.placa[0].espessura);
+                let tt = (parseFloat(calculo.tipoArruela)/2) + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura) + (parseFloat(calculo.tipoArruela)/2);
+                let t3 = parseFloat(calculo.placa[0].espessura) - (tt/2) - parseFloat(calculo.tipoArruela);
+                let t4 = parseFloat(calculo.placa[1].espessura) - t3;
+                let t5 = (parseFloat(calculo.tipoArruela)/2);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4 + "\nt5: " + t5);
+            
+                /**
+                * B) Calcular os valores de D;
+                */
+                
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*(parseFloat(calculo.tipoArruela)/2);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*((parseFloat(calculo.tipoArruela)/2) + t2);
+                let d3 = parseFloat(calculo.wParafuso) + (x3*2);
+                let x4 = 0.5774*(parseFloat(calculo.tipoArruela)/2);
+                let d4 = parseFloat(calculo.porca.wPorca) + x4;
+                let d5 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nx4: " + x4 + "\nd4: " + d4 + "\nd5: " + d5);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k5 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t5)+(d5-parseFloat(calculo.furo)))*(d5+parseFloat(calculo.furo))))/(((1.155*t5)+(d5+parseFloat(calculo.furo)))*(d5-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4 + "\nk5: " + k5);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4)+(1/k5));
+              }
+    
+             /*
+                                                            OITAVA POSSIBILIDADE 
+             */
+              if((calculo.placa[0].espessura < calculo.placa[1].espessura) && (calculo.posArruela == '0') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+                let t1 = parseFloat(calculo.placa[0].espessura);
+                let tt = parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);; 
+                let t2 = (tt/2) -  parseFloat(calculo.placa[0].espessura);
+                let t3 = parseFloat(calculo.placa[1].espessura) - t2;
+      
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3);
+    
+                /**
+                * B) Calcular os valores de D;
+                */
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.placa[0].espessura);
+                let d2 = parseFloat(calculo.porca.wPorca) + (x2*2);
+                let d3 = parseFloat(calculo.porca.wPorca);
+      
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nd3: " + d3);
+      
+                /**
+                * C) Calcular rigidez dos membros
+                */
+      
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+               
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3);
+      
+                let km = 1/((1/k1)+(1/k2)+(1/k3));
+              }
+            
+         /*
+                                                        NONA POSSIBILIDADE 
+        */
+              if((calculo.placa[0].espessura === calculo.placa[1].espessura) && (calculo.posArruela == 'cabeca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+                let t1 = parseFloat(calculo.tipoArruela);
+                let tt = parseFloat(calculo.tipoArruela) + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);
+                let t3 = (parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.tipoArruela)) - (tt/2);
+                let t2 = parseFloat(calculo.placa[0].espessura) - t3;
+                let t4 = parseFloat(calculo.placa[1].espessura);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+         
+                /**
+                * B) Calcular os valores de D;
+                */
+        
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*t4;
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                *C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+    
+         /*
+                                                        DÃ‰CIMA POSSIBILIDADE 
+        */
+              if((calculo.placa[0].espessura === calculo.placa[1].espessura) && (calculo.posArruela == 'porca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+                let tt = parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura) +  parseFloat(calculo.tipoArruela);
+                let t1 = parseFloat(calculo.placa[0].espessura);
+                let t2 = (tt/2) - parseFloat(calculo.placa[0].espessura);
+                let t3 = parseFloat(calculo.placa[1].espessura) - t2;
+                let t4 =  parseFloat(calculo.tipoArruela);
+     
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+               
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*parseFloat(calculo.placa[0].espessura);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*parseFloat(calculo.tipoArruela);
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+     
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+     
+                /**
+                * C) Calcular rigidez dos membros
+                */
+     
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+     
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
+     
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+         
+         /*
+                                                        DÃ‰CIMA PRIMEIRA POSSIBILIDADE 
+         */
+     
+                if((calculo.placa[0].espessura === calculo.placa[1].espessura) && (calculo.posArruela == 'ambos') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+    
+                let t1 = (parseFloat(calculo.tipoArruela)/2);
+                let t2 = parseFloat(calculo.placa[0].espessura);
+                let t3 = parseFloat(calculo.placa[1].espessura);
+                let t4 = (parseFloat(calculo.tipoArruela)/2);
+     
+                console.log("\nt1: " + t1 + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+              
+                /**
+                * B) Calcular os valores de D;
+                */
+         
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*(parseFloat(calculo.tipoArruela)/2);
+                let d2 = parseFloat(calculo.wParafuso) + (x2*2);
+                let x3 = 0.5774*(parseFloat(calculo.tipoArruela)/2);
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+     
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+     
+                /**
+                * C) Calcular rigidez dos membros
+                */
+     
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+     
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
+     
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+              }
+    
+         /*
+                                                        DÃ‰CIMA SEGUNDA POSSIBILIDADE 
+         */
+         
+              if((calculo.placa[0].espessura === calculo.placa[1].espessura) && (calculo.posArruela == '0') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+    
+                let t1 = parseFloat(calculo.placa[0].espessura);
+                let t2 = parseFloat(calculo.placa[1].espessura);
+     
+                console.log("\nt1: " + t1 + "\nt2: " + t2);
+                /**
+                * B) Calcular os valores de D;
+                */
+                let d1 = parseFloat(calculo.wParafuso);
+                let d2 = parseFloat(calculo.porca.wPorca);
+     
+                console.log("\nd1: " + d1 + "\nd2: " + d2);
+     
+                /**
+                * C) Calcular rigidez dos membros
+                */
+     
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+         
+                console.log("k1: " + k1 + "\nk2: " + k2);
+     
+                let km = 1/((1/k1)+(1/k2));
+              }
+    
+         /*
+                                                            PRIMEIRA POSSIBILIDADE 
+         */
+         
+              if((calculo.placa[0].espessura > calculo.placa[1].espessura) && (calculo.posArruela == 'cabeca') ){
+    
+                /**
+                * A) Calculando os valores de T;
+                */
+    
+                let t1 = parseFloat(calculo.tipoArruela);
+                let tt = t1 + parseFloat(calculo.placa[0].espessura) + parseFloat(calculo.placa[1].espessura);
+                let t2 = (tt/2) - parseFloat(calculo.tipoArruela);
+                let t3 = parseFloat(calculo.placa[0].espessura) - t2;
+                let t4 = parseFloat(calculo.placa[1].espessura);
+    
+                console.log("\nt1: " + t1 + "\ntt: " + tt + "\nt2: " + t2 + "\nt3: " + t3 + "\nt4: " + t4);
+               
+                /**
+                * B) Calcular os valores de D;
+                */
+    
+                let d1 = parseFloat(calculo.wParafuso);
+                let x2 = 0.5774*t1;
+                let d2 = d1 + (x2*2)
+                let x3 = 0.5774*t4;
+                let d3 = parseFloat(calculo.porca.wPorca) + (x3*2);
+                let d4 = parseFloat(calculo.porca.wPorca);
+    
+                console.log("\nd1: " + d1 + "\nx2: " + x2 + "\nd2: " + d2 + "\nx3: " + x3 + "\nd3: " + d3 + "\nd4: " + d4);
+    
+                /**
+                * C) Calcular rigidez dos membros
+                */
+    
+                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+    
+                console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3+ "\nk4: " + k4);
+    
+                let km = 1/((1/k1)+(1/k2)+(1/k3)+(1/k4));
+
+
+              }
+              return km;
+        }
+    }

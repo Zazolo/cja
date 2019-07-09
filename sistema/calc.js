@@ -7,22 +7,10 @@
 
 let parafuso = { 
     m:[
-        {
-         At:'',
-         wParafuso:'',
-         wPorca:['','',''],
-         arruela:['','',''],
-         DF:''   
-        }
+        {At:'',wParafuso:'',wPorca:['','',''],arruela:['','',''],DF:''}
     ],
     in: [
-        {
-            At: '',
-            wParafuso:'',
-            wPorca:'',
-            arruela:'',
-            DF:''
-        }
+        {At: '', wParafuso:'', wPorca:'', arruela:'', DF:''}
     ]
 }
 
@@ -665,6 +653,15 @@ function calcTamanhoParafuso(calculo){ ///--------------------------------------
     let totalPlaca = 0;
     let totalArruela = 0;
     let L;
+    let aco;
+    switch(calculo.unidade){
+        case 'in':
+            aco = 30;
+        break;
+        case 'm':
+            aco = 207;
+        break;
+    }
     for(let i=0; i < calculo.placa.length; i++){
         totalPlaca += parseInt(calculo.placa[i].espessura);
     }
@@ -826,7 +823,7 @@ function calcRigidezMembros(calculo){
                 *C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 
@@ -869,7 +866,7 @@ function calcRigidezMembros(calculo){
     
                 let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
-                let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
+                let k3 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
               
               
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3);
@@ -911,10 +908,10 @@ function calcRigidezMembros(calculo){
                 * Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[placa].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
-                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
                
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
     
@@ -996,7 +993,7 @@ function calcRigidezMembros(calculo){
                  * C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
@@ -1044,7 +1041,7 @@ function calcRigidezMembros(calculo){
                 let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
-                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
     
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3+ "\nk4: " + k4);
     
@@ -1088,11 +1085,11 @@ function calcRigidezMembros(calculo){
                 * C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
-                let k5 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t5)+(d5-parseFloat(calculo.furo)))*(d5+parseFloat(calculo.furo))))/(((1.155*t5)+(d5+parseFloat(calculo.furo)))*(d5-parseFloat(calculo.furo))));
+                let k5 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t5)+(d5-parseFloat(calculo.furo)))*(d5+parseFloat(calculo.furo))))/(((1.155*t5)+(d5+parseFloat(calculo.furo)))*(d5-parseFloat(calculo.furo))));
     
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4 + "\nk5: " + k5);
     
@@ -1175,7 +1172,7 @@ function calcRigidezMembros(calculo){
                 * C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
@@ -1222,7 +1219,7 @@ function calcRigidezMembros(calculo){
                 let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
-                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
              
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
     
@@ -1267,11 +1264,11 @@ function calcRigidezMembros(calculo){
                 * C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
-                let k5 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t5)+(d5-parseFloat(calculo.furo)))*(d5+parseFloat(calculo.furo))))/(((1.155*t5)+(d5+parseFloat(calculo.furo)))*(d5-parseFloat(calculo.furo))));
+                let k5 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t5)+(d5-parseFloat(calculo.furo)))*(d5+parseFloat(calculo.furo))))/(((1.155*t5)+(d5+parseFloat(calculo.furo)))*(d5-parseFloat(calculo.furo))));
     
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4 + "\nk5: " + k5);
     
@@ -1349,7 +1346,7 @@ function calcRigidezMembros(calculo){
                 *C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
@@ -1395,7 +1392,7 @@ function calcRigidezMembros(calculo){
                 let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
-                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
      
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
      
@@ -1436,10 +1433,10 @@ function calcRigidezMembros(calculo){
                 * C) Calcular rigidez dos membros
                 */
      
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
-                let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
+                let k4 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));
      
                 console.log("k1: " + k1 + "\nk2: " + k2 + "\nk3: " + k3 + "\nk4: " + k4);
      
@@ -1515,7 +1512,7 @@ function calcRigidezMembros(calculo){
                 * C) Calcular rigidez dos membros
                 */
     
-                let k1 = 0.5774*Math.PI*(parseFloat(calculo.placa[aco].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
+                let k1 = 0.5774*Math.PI*(aco)*parseFloat(calculo.furo)/Math.log(((((1.155*t1)+(d1-parseFloat(calculo.furo)))*(d1+parseFloat(calculo.furo))))/(((1.155*t1)+(d1+parseFloat(calculo.furo)))*(d1-parseFloat(calculo.furo))));
                 let k2 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t2)+(d2-parseFloat(calculo.furo)))*(d2+parseFloat(calculo.furo))))/(((1.155*t2)+(d2+parseFloat(calculo.furo)))*(d2-parseFloat(calculo.furo))));
                 let k3 = 0.5774*Math.PI*(parseFloat(calculo.placa[0].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t3)+(d3-parseFloat(calculo.furo)))*(d3+parseFloat(calculo.furo))))/(((1.155*t3)+(d3+parseFloat(calculo.furo)))*(d3-parseFloat(calculo.furo))));
                 let k4 = 0.5774*Math.PI*(parseFloat(calculo.placa[1].tipo))*parseFloat(calculo.furo)/Math.log(((((1.155*t4)+(d4-parseFloat(calculo.furo)))*(d4+parseFloat(calculo.furo))))/(((1.155*t4)+(d4+parseFloat(calculo.furo)))*(d4-parseFloat(calculo.furo))));

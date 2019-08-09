@@ -8,20 +8,20 @@ window.addEventListener("load", function () {
     document.getElementById("btIniciar").addEventListener("click", function (event) {
       //->Troca para a tela de seleção da unidade métrica;
       __trocaDisplay("C.J.A.");
-      __trocaSubDisplay("Selecine a unidade métrica na qual será utilizada no cálculo.");
+      __trocaSubDisplay("Selecione a unidade.");
       __showHide("telaIntro");
       __showHide("telaSelectUnidade");
 
     });
 
     document.getElementById("btProsseguirUnidade").addEventListener("click", function(event) {
-        __trocaSubDisplay("Informe a quantidade de placas que serão utilizadas.");
+        __trocaSubDisplay("Informe a quantidade de placas.");
         __showHide("telaSelectUnidade");
         __showHide("telaSelectQuantidadePlaca");
     });
 
     document.getElementById("btProsseguirDiametroParafuso").addEventListener("click", function(event) {
-        __trocaSubDisplay("Selecione o diâmetro do parafuso que será utilizado.");
+        __trocaSubDisplay("Selecione o diâmetro do parafuso.");
         __showHide("telaSelectQuantidadePlaca");
         __showHide("telaDiametroParafuso");
 
@@ -36,7 +36,7 @@ window.addEventListener("load", function () {
 
     document.getElementById("btProsseguirSelecaoPlacas").addEventListener("click", function(event) {
 
-        __trocaSubDisplay("Selecione o material para a quantidade de placas solicitadas.");
+        __trocaSubDisplay("Informe a(s) espessura(s) e selecione o(s) material(ais) da(s) placa(s).");
         __showHide("telaSelecaoPlacas");
         __showHide("telaDiametroParafuso");
         switch(calculo.qtdPlacas){
@@ -84,8 +84,8 @@ window.addEventListener("load", function () {
             if(tdp_in[j].diametro == calculo.diametro) {
                 console.log("Achou a área rosqueada");
                 __set().setAt(tdp_in[j].At);
-                __set().setWParafuso(tdp_in[i].wParafuso);
-                __set().setdFuro(tdp_in[i].furo);
+                __set().setWParafuso(tdp_in[j].wParafuso);
+                __set().setdFuro(tdp_in[j].furo);
             }
         }
     });
@@ -224,8 +224,8 @@ window.addEventListener("load", function () {
         __showHide("telaCalculoFinal");
         __showHide("telaSelecaoTipoPorca");
 
-        //alert("RIGIDEZ: " + calcRigidez(calculo));
-        alert("RIGIDEZ DOS MEMBROS: " + calcRigidezMembros(calculo));
+        setInterval(()=> {alert("RIGIDEZ: " + calcRigidez(calculo))},2000);
+        setInterval(()=> {alert("RIGIDEZ DOS MEMBROS: " + calcRigidezMembros(calculo))},5000);
         
     });
 

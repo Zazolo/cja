@@ -69,12 +69,12 @@ window.addEventListener("load", function () {
     */
     document.getElementById("select-diametro-parafuso-m").addEventListener("change", function() {
         __set().diamParafuso($("#select-diametro-parafuso-m").val());
-
-
         //-->Seleciona a area rosqueada de acordo com a tabela.
         for(let i = 0; i < tdp_m.length; i++){
             if(tdp_m[i].diametro == calculo.diametro) {
                 __set().setAt(tdp_m[i].At);
+                __set().setWParafuso(tdp_m[i].wParafuso);
+                __set().setdFuro(tdp_m[i].furo);
             }
         }
     });
@@ -84,6 +84,8 @@ window.addEventListener("load", function () {
             if(tdp_in[j].diametro == calculo.diametro) {
                 console.log("Achou a área rosqueada");
                 __set().setAt(tdp_in[j].At);
+                __set().setWParafuso(tdp_in[i].wParafuso);
+                __set().setdFuro(tdp_in[i].furo);
             }
         }
     });
@@ -222,7 +224,8 @@ window.addEventListener("load", function () {
         __showHide("telaCalculoFinal");
         __showHide("telaSelecaoTipoPorca");
 
-        alert("RIGIDEZ: " + calcRigidez(calculo));
+        //alert("RIGIDEZ: " + calcRigidez(calculo));
+        alert("RIGIDEZ DOS MEMBROS: " + calcRigidezMembros(calculo));
         
     });
 
@@ -260,6 +263,14 @@ function __set(){
             calculo.AreaRosqueada = at;
             console.log('Area Rosqueada: ' + calculo.AreaRosqueada);
         },
+        setWParafuso: (wParafuso) => {
+            calculo.wParafuso = wParafuso;
+            console.log('wParafuso: ' + calculo.wParafuso);
+        },
+        setdFuro: (dFuro) => {
+            calculo.furo = dFuro;
+            console.log('dFuro: ' + calculo.furo);
+        },
         qtdPlacas: (quantidade) => {
             calculo.qtdPlacas = quantidade; 
             console.log('Quantidade de placas alterada para ' + calculo.qtdPlacas);
@@ -289,7 +300,7 @@ function __set(){
             
             //--->Verificar com o Luccas;
 
-            if(calculo.posArruela = 'ambos'){
+            if(calculo.posArruela == 'ambos'){
                 console.log("Duas arruelas serão utilizadas, portanto o valor será multiplicado.");
                 calculo.tipoArruela += calculo.tipoArruela;
             }

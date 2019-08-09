@@ -655,7 +655,7 @@ function calcTamanhoParafuso(calculo){ ///--------------------------------------
     let totalPlaca = 0;
     let totalArruela = 0;
     let L;
-    let aco;
+
     switch(calculo.unidade){
         case 'in':
             aco = 30;

@@ -224,9 +224,26 @@ window.addEventListener("load", function () {
         __showHide("telaCalculoFinal");
         __showHide("telaSelecaoTipoPorca");
 
-        setInterval(()=> {alert("RIGIDEZ: " + calcRigidez(calculo))},2000);
-        setInterval(()=> {alert("RIGIDEZ DOS MEMBROS: " + calcRigidezMembros(calculo))},5000);
-        
+        var resultRigidez = calcRigidez(calculo);
+        var resultRigidezMembros = calcRigidezMembros(calculo);
+
+
+        $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo de Rigidez dos Membros: " + resultRigidezMembros + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
+        $("#telaCalculoFinal").append("<p>-----Informações Gerais--------------------------------------------</p>");
+        $("#telaCalculoFinal").append("<p>Unidade de medidada: " + calculo.unidade + "</p>");
+        $("#telaCalculoFinal").append("<p>Diâmetro do Parafuso: " + calculo.diametro + "</p>");
+        $("#telaCalculoFinal").append("<p>Área Rosqueada: " + calculo.AreaRosqueada + "</p>");
+        $("#telaCalculoFinal").append("<p>Quantidade de Placas: " + calculo.qtdPlacas + "</p>");
+        $("#telaCalculoFinal").append("<p>Posicao Arruela: " + calculo.posArruela + "</p>");
+        $("#telaCalculoFinal").append("<p>Total Arruela: " + calculo.tipoArruela + "</p>");
+        for(var i; i<calculo.qtdPlacas; i++){
+            $("#telaCalculoFinal").append("<p>PLACA ["+ i +"] TIPO: " + calculo.placa[i].tipo + "</p>");
+            $("#telaCalculoFinal").append("<p>PLACA ["+ i +"] ESPESSURA: " + calculo.placa[i].espessura + "</p>");
+        }
+        $("#telaCalculoFinal").append("<p>wParafuso : " + calculo.wParafuso + "</p>");
+        $("#telaCalculoFinal").append("<p>Tamanho do Furo: " + calculo.furo + "</p>");
     });
 
 

@@ -204,26 +204,32 @@ window.addEventListener("load", function () {
             if(calculo.posArruela == 'nenhuma'){
                 $("#btProsseguirTipoPorca").click();
             }
+
             
+            const ElementosTextuaisMetrico = ['N', 'R', 'W'];
+            const ElementosTextuaisIngles = ['N', 'W'];
             switch (calculo.unidade){
                 case 'm':
+                    __showHide("legendaTipoArruelaMetrico");
                     for(let i = 0; i<tdp_m.length; i++){
                         if(calculo.diametro == tdp_m[i].diametro){
                             for(let j = 0; j < tdp_m[i].arruela.length; j++){
                                 if(tdp_m[i].arruela[j] != null){
-                                    $("#select-tipo-arruela").append("<option value='" + tdp_m[i].arruela[j] + "'>"+tdp_m[i].arruela[j]+"mm</option>");
+                                    
+                                    $("#select-tipo-arruela").append("<option value='" + tdp_m[i].arruela[j] + "'>"+tdp_m[i].arruela[j]+"mm "+ ElementosTextuaisMetrico[j] +"</option>");
                                 }
                             }
                         }
                     }
                 break;
                 case 'in':
+                    __showHide("legendaTipoArruelaIngles");
                     for(let i = 0; i<tdp_in.length; i++){
                         if(calculo.diametro == tdp_in[i].diametro){
                             for(let j = 0; j < tdp_in[i].arruela.length; j++){
                                 if(tdp_in[i].arruela[j] != null){
                                     console.log("APPENDING to SELECT (tipo_arruela): " + tdp_in[i].arruela[j]);
-                                    $("#select-tipo-arruela").append("<option value='" + tdp_in[i].arruela[j] + "'>"+tdp_in[i].arruela[j]+"in</option>");
+                                    $("#select-tipo-arruela").append("<option value='" + tdp_in[i].arruela[j] + "'>"+tdp_in[i].arruela[j]+"in "+ ElementosTextuaisIngles[j] +"</option>");
                                 }
                             }
                         }

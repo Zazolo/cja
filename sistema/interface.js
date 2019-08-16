@@ -47,24 +47,32 @@ window.addEventListener("load", function () {
 
     document.getElementById("btProsseguirSelecaoPlacas").addEventListener("click", function(event) {
 
-        __trocaSubDisplay("Informe a(s) espessura(s) e selecione o(s) material(ais) da(s) placa(s).");
+        
         __showHide("telaSelecaoPlacas");
         __showHide("telaDiametroParafuso");
         switch(calculo.qtdPlacas){
             case 1:
+                    __trocaSubDisplay("Informe a espessura e selecione o material da placa.");    
                 if (calculo.unidade == 'm'){
+                    document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em milímetro";
                     __showHide("selectPlacasPlaca1m");
                 } else {
+                    document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em polegada decimal";
                     __showHide("selectPlacasPlaca1in");
                 }
             break;
 
             case 2:
+                __trocaSubDisplay("Informe a espessura e selecione o material das placas."); 
                 __showHide("selectPlacasInputLabel2");
                 if (calculo.unidade == 'm'){
+                    document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em milímetro";
+                    document.getElementById("input-espessura-placa-2").placeholder = "Informe o valor desejado em milímetro";
                     __showHide("selectPlacasPlaca1m");
                     __showHide("selectPlacasPlaca2m");
                 } else {
+                    document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em polegada decimal";
+                    document.getElementById("input-espessura-placa-2").placeholder = "Informe o valor desejado em polegada decimal";
                     __showHide("selectPlacasPlaca1in");
                     __showHide("selectPlacasPlaca2in");
                 }

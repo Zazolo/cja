@@ -42,11 +42,11 @@
                     <!-----Divisor de tela----->
                     <div id="telaSelectUnidade" class="uk-hidden">
                             <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-                                <li onclick="__set().unidade('m');"><a href="#">Métrica</a></li>
-                                <li onclick="__set().unidade('in');"><a href="#">Polegada</a></li>
+                                <li onclick="__set().unidade('m');"><a href="#">Sistema métrico</a></li>
+                                <li onclick="__set().unidade('in');"><a href="#">Sistema Inglês</a></li>
                             </ul>
                             <ul class="uk-switcher uk-margin">
-                                <li>A sistema métrico será utilizado para os cálculos!</li>
+                                <li>A sistema <b>métrico</b> será utilizado para os cálculos!</li>
                                 <li>O sistema inglês será a utilizado para os cálculos! </li>
                             </ul>
                         <button class="uk-button uk-button-default" id="btProsseguirUnidade">Prosseguir</button>
@@ -120,10 +120,14 @@
 
                     <!-----Divisor de tela----->
                     <div id="telaSelecaoPlacas" class="uk-hidden">
+                        <!---
+                            Lemebrar de variar o texto na frente das placas para definir a espessura de acordo
+                        com o calculo.unidade.
+                        -->
                         <label class="uk-form-label" for="input-espessura-placa-1">Espessura da placa 1</label>
                         <input class="uk-input" placeholder="Informe o valor de acordo com a unidade selecionada em decimal" id="input-espessura-placa-1">
                         <div class="uk-hidden" id="selectPlacasPlaca1m">
-                            <label class="uk-form-label" for="select-placa-m-t1">Material da placa 1 (metro)</label>
+                            <label class="uk-form-label" for="select-placa-m-t1">Material da placa 1</label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="select-placa-m-t1">
                                     <option selected value="207">Aços - 207GPa</option>
@@ -137,7 +141,7 @@
                         
 
                         <div class="uk-hidden" id="selectPlacasPlaca1in">
-                            <label class="uk-form-label" for="select-placa-in-t1">Material da placa 1 (polegada)</label>
+                            <label class="uk-form-label" for="select-placa-in-t1">Material da placa 1</label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="select-placa-in-t1">
                                     <option selected value="30">Aços - 30Mpsi</option>
@@ -149,6 +153,10 @@
                         </div>
 
                         <div class="uk-hidden" id="selectPlacasInputLabel2">
+                            <!---
+                                Lemebrar de variar o texto na frente das placas para definir a espessura de acordo
+                            com o calculo.unidade.
+                            -->
                             <label class="uk-form-label" for="input-espessura-placa-2">Espessura da placa 2</label>
                             <input class="uk-input" placeholder="valor" id="input-espessura-placa-2">
                         </div>
@@ -192,11 +200,11 @@
                                 Selecione onde esta arruela irá: <br>
                                 <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                                     
-                                    <li onclick="__set().setQtdArroela(1, 'cabeca');"><a href="#">Abaixo da cabeça do parafuso</a></li><br>
+                                    <li onclick="__set().setQtdArroela(1, 'cabeca');"><a href="#">Abaixo da </b>cabeça do parafuso</a></li><br>
                                     <li onclick="__set().setQtdArroela(1, 'porca');"><a href="#">Acima da porca.</a></li>
                                 </ul> 
                             </li>
-                            <li>Ao selecionar duas arroelas, obrigatoriamente elas seão posicionadas uma abaixo da cabeça do parafuso e a outra acima da porca.</li>
+                            <li>Ao selecionar duas arruelas, obrigatoriamente elas serão posicionadas uma abaixo da cabeça do parafuso e a outra acima da porca.</li>
                         </ul>
                         <br>
                         <br>

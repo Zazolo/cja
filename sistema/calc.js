@@ -648,13 +648,20 @@ let calculo = {
     placa:[{tipo:'0', espessura:'0'}, {tipo:'0', espessura:'0'}],
     porca: {wPorca: '0', hPorca: '0'},
     wParafuso: 0,
-    furo:0
+    furo:0,
+    L_definido = undefined
 }
 
 function calcTamanhoParafuso(calculo){ ///-----------------------------------------------------Retorna L;
     let totalPlaca = 0;
     let totalArruela = 0;
     let L;
+
+    //retorno parar recalcular no final;
+    if(calculo.L_definido != undefined){
+        return calculo.L_definido;
+    }
+    //-------------------------------------------;
 
     switch(calculo.unidade){
         case 'in':
@@ -722,9 +729,13 @@ function calcCompPorUtil_N_Rosqueavel(calculo){
     return Ld;
 }
 
-function calcTamParafusoMenosPorca(calculo){
+function calcTamParafusoMenosPorca(calculo, opt){
     console.log("Calculando a Diferença entre Parafuso-Porca...");
     let L = calcTamanhoParafuso(calculo);
+    if(opt !== undefined){
+        L = opt;
+    }
+     = calcTamanhoParafuso(calculo);
     //console.log("L: " + L);
     let hP = parseFloat(calculo.porca.hPorca);
     //console.log("hP: " + hP);
@@ -783,6 +794,17 @@ function calcRigidezMembros(calculo){
     let quantidade_arruelas = 0;
     let quantidade_placas = 0;
     let posicao_arruelas = 'nenhuma';
+
+
+
+    ///VERIFICAR AINDA!///
+    let L = calcTamanhoParafuso(calculo);
+    let diametro = calculo.diametro;
+    if(L*3 <= diametro){
+        alert("Oops!\nEsta conta não poderá ser feita, pois o L não respeira a regra:\n L*3 < Diâmetro.");
+        return;
+    }
+    //////////////////////////////////
 
     //pegar os valores iniciais necessÃ¡rio para a conta;
 

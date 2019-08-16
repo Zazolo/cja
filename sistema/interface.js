@@ -7,24 +7,35 @@ window.addEventListener("load", function () {
 
     document.getElementById("btIniciar").addEventListener("click", function (event) {
       //->Troca para a tela de seleção da unidade métrica;
-      __trocaDisplay("C.J.A.");
-      __trocaSubDisplay("Selecione a unidade.");
+      //__trocaDisplay("C.J.A.");
+      __showHide("logo_others_container");
+      __showHide("introInfoContainer");
+      __trocaSubDisplay("Selecione o sistema de unidade.");
       __showHide("telaIntro");
       __showHide("telaSelectUnidade");
-
+        __showHide("tabelaContainerDivMaster");
     });
 
     document.getElementById("btProsseguirUnidade").addEventListener("click", function(event) {
+        if(calculo.unidade == 'm'){
+            selectDiametroM();
+        } else {
+            selectDiametroIN();
+        }
+
         __trocaSubDisplay("Informe a quantidade de placas.");
         __showHide("telaSelectUnidade");
         __showHide("telaSelectQuantidadePlaca");
+
+
     });
 
     document.getElementById("btProsseguirDiametroParafuso").addEventListener("click", function(event) {
         __trocaSubDisplay("Selecione o diâmetro do parafuso.");
         __showHide("telaSelectQuantidadePlaca");
         __showHide("telaDiametroParafuso");
-
+        __set().qtdPlacas(1);
+        console.log("Quantidades de placas definida para " + calculo.qtdPlacas);
         if(calculo.unidade == 'm'){
             __showHide('dmParafusoM');
         } else {
@@ -68,6 +79,13 @@ window.addEventListener("load", function () {
     Listeners da seleção do diâmetro do para parafuso;
     */
     document.getElementById("select-diametro-parafuso-m").addEventListener("change", function() {
+        selectDiametroM();
+    });
+    document.getElementById("select-diametro-parafuso-in").addEventListener("change", function() {
+        selectDiametroIN();
+    });
+
+    function selectDiametroM(){
         __set().diamParafuso($("#select-diametro-parafuso-m").val());
         //-->Seleciona a area rosqueada de acordo com a tabela.
         for(let i = 0; i < tdp_m.length; i++){
@@ -77,8 +95,9 @@ window.addEventListener("load", function () {
                 __set().setdFuro(tdp_m[i].furo);
             }
         }
-    });
-    document.getElementById("select-diametro-parafuso-in").addEventListener("change", function() {
+    }
+
+    function selectDiametroIN(){
         __set().diamParafuso($("#select-diametro-parafuso-in").val());
         for(let j = 0; j < tdp_in.length; j++){
             if(tdp_in[j].diametro == calculo.diametro) {
@@ -88,7 +107,7 @@ window.addEventListener("load", function () {
                 __set().setdFuro(tdp_in[j].furo);
             }
         }
-    });
+    }
 
     /*
     Listeners da seleção do tipo de material usado nas placas;
@@ -120,6 +139,45 @@ window.addEventListener("load", function () {
 
     document.getElementById("btProsseguirQuantidadeArroela").addEventListener("click", function(event) {
 
+        
+
+        function alertaErrosCamposVazios(){
+            alert("Verifique o(s) valor(es) informado(s) para a(s) placa(s).");
+        }
+
+        let valEspessuraP1 = $("#input-espessura-placa-1").val();
+        let valEspessuraP2 = $("#input-espessura-placa-2").val();
+        if(calculo.qtdPlacas == 2){
+            if(((valEspessuraP1 == '' || valEspessuraP1 == undefined || valEspessuraP1 == null || valEspessuraP1 <= 0))||((valEspessuraP2 == '' || valEspessuraP2 == undefined || valEspessuraP2 == null || valEspessuraP2 <= 0))){
+                alertaErrosCamposVazios();
+                return;
+            }
+        } else if (calculo.qtdPlacas == 1){
+            if((valEspessuraP1 == '' || valEspessuraP1 == undefined || valEspessuraP1 == null || valEspessuraP1 <= 0)){
+                alertaErrosCamposVazios();
+                return;
+            }
+        }
+        
+        if(calculo.unidade == 'm'){
+            if(calculo.qtdPlacas == 1){
+                __set().setTipoPlaca(1, $("#select-placa-m-t1").val());
+                __set().setEspessuraPlaca(1, valEspessuraP1);
+            } else if (calculo.qtdPlacas == 2){
+                __set().setTipoPlaca(1, $("#select-placa-m-t1").val());
+                __set().setTipoPlaca(2, $("#select-placa-m-t2").val());
+                __set().setEspessuraPlaca(1, valEspessuraP1);
+                __set().setEspessuraPlaca(2, valEspessuraP2);
+            }
+        } else if (calculo.unidade == 'in'){
+            if(calculo.qtdPlacas == 1){
+                __set().setTipoPlaca(1, $("#select-placa-in-t1").val());
+            } else if (calculo.qtdPlacas == 2){
+                __set().setTipoPlaca(1, $("#select-placa-in-t1").val());
+                __set().setTipoPlaca(1, $("#select-placa-in-t2").val());
+            }
+        }
+
         __trocaSubDisplay("Selecione a quantidade de arruelas.");
         __showHide("telaSelecaoPlacas");
         __showHide("telaSelecaoQtdArroelas");
@@ -130,11 +188,14 @@ window.addEventListener("load", function () {
 
     document.getElementById("btProsseguirTipoArruela").addEventListener("click", function() {
         if((calculo.diametro > 36) && (calculo.unidade == 'm') && (calculo.posArruela != 'nenhuma')){
-            alert("Não é possível realizar o cálculo para arruela com o tamanho e unidade selecionados. Verifique e tente novamente!");
+            alert("Não é possível realizar o cálculo utilizando arruelas, se anteriormente foi escolhido o sistema métrico e um diâmetro maior que 36mm. Verifique e tente novamente!");
+            return;
         } else {
 
-            
-            __trocaSubDisplay("Selecione o tipo da arruela");
+            /**
+             * Aqui não entendi o que devo fazer para continuar...!
+             */
+            __trocaSubDisplay("Selecione a espessura (tipo) da arruela");
             __showHide("telaSelecaoTipoArruela");
             __showHide("telaSelecaoQtdArroelas");
 

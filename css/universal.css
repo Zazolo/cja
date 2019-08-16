@@ -1,0 +1,19 @@
+body{
+    background-color: #42413f;
+    height: 100vh;
+}
+
+.logoImgIntro{
+    max-height: 30vh;
+    object-fit: contain;
+}
+
+.logo_others{
+    max-height: 15vh;
+    object-fit: contain;
+}
+#logo_others_container{
+    width: 100%;
+    position: relative;
+    height: 15vh;
+}

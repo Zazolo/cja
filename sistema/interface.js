@@ -299,11 +299,16 @@ window.addEventListener("load", function () {
         __set().setPorca($("#select-tipo-porca").find(':selected').data('porca'));
     });
 
+    document.getElementById("btProsseguirInformacaoAvaliacao").addEventListener("click", function(event){
+        __trocaSubDisplay("Preencha os campos abaixo para calcular os fatores de segurança.");
+        __showHide("telaSelecaoTipoPorca");
+        __showHide("telaInformacaoAvaliacao");
+    });
     document.getElementById("btProsseguirCalculoFinal").addEventListener("click", function(event) {
 
         __trocaSubDisplay("Selecione a quantidade de arruelas.");
         __showHide("telaCalculoFinal");
-        __showHide("telaSelecaoTipoPorca");
+        __showHide("telaInformacaoAvaliacao");
 
         var resultRigidez = calcRigidez(calculo);
         var resultRigidezMembros = calcRigidezMembros(calculo);

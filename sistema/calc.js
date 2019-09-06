@@ -649,7 +649,7 @@ let calculo = {
     porca: {wPorca: '0', hPorca: '0'},
     wParafuso: 0,
     furo:0,
-    L_definido = undefined
+    L_definido : undefined
 }
 
 function calcTamanhoParafuso(calculo){ ///-----------------------------------------------------Retorna L;
@@ -735,7 +735,7 @@ function calcTamParafusoMenosPorca(calculo, opt){
     if(opt !== undefined){
         L = opt;
     }
-     = calcTamanhoParafuso(calculo);
+     //= calcTamanhoParafuso(calculo);
     //console.log("L: " + L);
     let hP = parseFloat(calculo.porca.hPorca);
     //console.log("hP: " + hP);

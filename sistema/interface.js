@@ -13,13 +13,19 @@ window.addEventListener("load", function () {
       __trocaSubDisplay("Selecione o sistema de unidade.");
       __showHide("telaIntro");
       __showHide("telaSelectUnidade");
-        __showHide("tabelaContainerDivMaster");
+        
     });
 
+
+
+
     document.getElementById("btProsseguirUnidade").addEventListener("click", function(event) {
+        __showHide("tabelaContainerDivMaster");
         if(calculo.unidade == 'm'){
+            __showHide("btVerTabelaSistemaMetrico");
             selectDiametroM();
         } else {
+            __showHide("btVerTabelaSistemaIngles");
             selectDiametroIN();
         }
 
@@ -34,8 +40,8 @@ window.addEventListener("load", function () {
         __trocaSubDisplay("Selecione o diâmetro do parafuso.");
         __showHide("telaSelectQuantidadePlaca");
         __showHide("telaDiametroParafuso");
-        __set().qtdPlacas(1);
-        console.log("Quantidades de placas definida para " + calculo.qtdPlacas);
+        //__set().qtdPlacas(1);
+        //console.log("Quantidades de placas definida para " + calculo.qtdPlacas);
         if(calculo.unidade == 'm'){
             __showHide('dmParafusoM');
         } else {

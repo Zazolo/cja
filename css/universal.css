@@ -17,3 +17,7 @@ body{
     position: relative;
     height: 15vh;
 }
+
+.no-bkg{
+    background: transparent!important;
+}

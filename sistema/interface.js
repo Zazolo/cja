@@ -353,18 +353,34 @@ window.addEventListener("load", function () {
         __showHide("telaInformacaoAvaliacao");
 
         //--->somente para caso o usuário avance sem selecionar nada.
-        if(calculo.unidade == 'in'){
+        if(calculo.unidade == 'in' && calculo.planoResistencia == 'tabelada'){
             __showHide("container-opt-tabelada-ingles");
             __set().setValorResistencia($("#select-valor-tabela-sae").val());
-        } else {
+        } else if(calculo.unidade == 'm' && calculo.planoResistencia == 'tabelada'){
             __showHide("container-opt-tabelada-metrico");
             __set().setValorResistencia($("#select-valor-tabela-metrico").val());
+        } else if(calculo.planoResistencia == 'calculada'){
+            __showHide("container-opt-calculada");
+            if(calculo.unidade == 'in'){
+                __showHide("lblResistenciaCalculadaIngles");
+            } else {
+                __showHide("lblResistenciaCalculadaMetrico");
+            }
         }
         
 
     });
 
     document.getElementById("btProsseguirTelaTipoConexao").addEventListener("click", function(){
+
+        if(calculo.planoResistencia == 'calculada'){
+            if(calculo.valorResistencia == 0 || calculo.valorResistencia == undefined){
+                alert("Verifique o valor da resistência antes de prosseguir.");
+                return;
+            }
+        }
+
+
         __trocaSubDisplay("Informe se a conexão utilizada é permanente ou não permanente.");
 
         __showHide("telaTipoConexao");

@@ -303,12 +303,82 @@ window.addEventListener("load", function () {
         __trocaSubDisplay("Preencha os campos abaixo para calcular os fatores de segurança.");
         __showHide("telaSelecaoTipoPorca");
         __showHide("telaInformacaoAvaliacao");
+
+        if(calculo.unidade == 'in'){
+            __showHide('lblCargaExternaTotalIngles');
+        } else {
+            __showHide('lblCargaExternaTotalMetrico');
+        }
+
+        //--->valor padrão para facilidar caso o usuario avance sem selecionar nada...;
+        __set().setPlanoCalculoResistencia('tabelada');
     });
+
+
+    document.getElementById("select-valor-tabela-sae").addEventListener("change", function() {
+        __set().setValorResistencia($("#select-valor-tabela-sae").val());
+    });
+
+    document.getElementById("select-valor-tabela-astm").addEventListener("change", function() {
+        __set().setValorResistencia($("#select-valor-tabela-astm").val());
+    });
+
+    document.getElementById("select-valor-tabela-metrico").addEventListener("change", function() {
+        __set().setValorResistencia($("#select-valor-tabela-metrico").val());
+    });
+
+    document.getElementById("input-quantidade-parafuso").addEventListener("keyup", function() {
+        __set().setQuantidadeParafuso($("#input-quantidade-parafuso").val());
+    });
+
+    document.getElementById("input-carga-externa-total").addEventListener("keyup", function() {
+        __set().setCargaExterna($("#input-carga-externa-total").val());
+    });
+
+    document.getElementById("btProsseguirEscolhaEspecificacaoParafuso").addEventListener("click", function() {
+        
+        
+        if(calculo.quantidadeParafusos == 0 || calculo.quantidadeParafusos == undefined){
+            alert("Informe uma quantidade de parafusos antes de prosseguir.");
+            return;
+        }
+        
+        if(calculo.cargaExternaTotal == 0 || calculo.cargaExternaTotal == undefined){
+            alert("Informe uma quantidade de carga externa antes de prosseguir.");
+            return;
+        }
+        
+        __trocaSubDisplay("Escolha a especifição do parafuso, consequentemente, escolha o tipo de parafuso e a sua resistência mínima correspondente.");
+        __showHide("telaEscolherEspecificacaoParafuso");
+        __showHide("telaInformacaoAvaliacao");
+
+        //--->somente para caso o usuário avance sem selecionar nada.
+        if(calculo.unidade == 'in'){
+            __showHide("container-opt-tabelada-ingles");
+            __set().setValorResistencia($("#select-valor-tabela-sae").val());
+        } else {
+            __showHide("container-opt-tabelada-metrico");
+            __set().setValorResistencia($("#select-valor-tabela-metrico").val());
+        }
+        
+
+    });
+
+    document.getElementById("btProsseguirTelaTipoConexao").addEventListener("click", function(){
+        __trocaSubDisplay("Informe se a conexão utilizada é permanente ou não permanente.");
+
+        __showHide("telaTipoConexao");
+        __showHide("telaEscolherEspecificacaoParafuso");
+        //---valor padrão para caso o usuário avance sem selecionar nada.;
+        __set().setPlanoCalculoResistencia('permanente');
+
+    });
+
     document.getElementById("btProsseguirCalculoFinal").addEventListener("click", function(event) {
 
         __trocaSubDisplay("Selecione a quantidade de arruelas.");
         __showHide("telaCalculoFinal");
-        __showHide("telaInformacaoAvaliacao");
+        __showHide("telaTipoConexao");
 
         var resultRigidez = calcRigidez(calculo);
         var resultRigidezMembros = calcRigidezMembros(calculo);
@@ -409,6 +479,26 @@ function __set(){
             }
 
             console.log("Tipo da arruela:" + calculo.tipoArruela );
+        },
+        setQuantidadeParafuso : (quantidade) => {
+            calculo.quantidadeParafusos = quantidade;
+            console.log("Quantidade de parafusos informada: " + calculo.quantidadeParafusos);
+        },
+        setCargaExterna : (carga) => {
+            calculo.cargaExternaTotal = carga;
+            console.log("Carga externa total informada: " + calculo.cargaExternaTotal);
+        },
+        setPlanoCalculoResistencia : (plano) => {
+            calculo.planoResistencia = plano;
+            console.log("O selecinou: " + calculo.planoResistencia + " como plano para calcular a resistencia");
+        },
+        setPlanoCalculoLigacao : (plano) => {
+            calculo.planoLigacao = plano;
+            console.log("O selecinou: " + calculo.planoResistencia);
+        },
+        setValorResistencia : (resistencia) => {
+            calculo.valorResistencia = resistencia;
+            console.log("valor da resistencia selecionada: " + calculo.valorResistencia);
         }
     }
 }

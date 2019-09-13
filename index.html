@@ -47,7 +47,7 @@
                             </ul>
                             <ul class="uk-switcher uk-margin">
                                 <li>A sistema <b>métrico</b> será utilizado para os cálculos!</li>
-                                <li>O sistema inglês será a utilizado para os cálculos! </li>
+                                <li>O sistema <b>inglês</b> será a utilizado para os cálculos! </li>
                             </ul>
                         <button class="uk-button uk-button-default" id="btProsseguirUnidade">Prosseguir</button>
                     </div>
@@ -247,14 +247,105 @@
                             </label>
                         </div>
                         
-                        <button class="uk-button uk-button-default" id="btProsseguirInformacaoAvaliacao">Calcular</button>
+                        <button class="uk-button uk-button-default" id="btProsseguirInformacaoAvaliacao">Prosseguir</button>
                     </div>
 
                     <div id="telaInformacaoAvaliacao" class="uk-hidden">
 
-                        <p>Teste</p>
+                        <label class="uk-form-label" for="input-quantidade-parafuso">Quantidade de parafusos</label>
+                        <input class="uk-input" placeholder="0" id="input-quantidade-parafuso">
+                        <br>
+                        <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalIngles">Carga externa aplicada total (KIPS)</label>
+                        <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalMetrico">Carga externa aplicada total (KM)</label>
+                        <input class="uk-input" placeholder="0" id="input-carga-externa-total">
+                        <br>
+                        <label class="uk-form-label">
+                            Deseja escolher os valores de resistência mínima de tração (Sp), pré definidos em tabela ou deseja obter esse valor através de calculo a partir da resistência mínima de escoamento?
+                        </label>
+
+                        <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+                            <li onclick="__set().setPlanoCalculoResistencia('tabelada');"><a href="#">Resistência mínima tabelada.</a></li><br>
+                            <li onclick="__set().setPlanoCalculoResistencia('calculada');"><a href="#">Resistência mínima calculada.</a></li>
+                        </ul>
+                       
+                        <button class="uk-button uk-button-default" id="btProsseguirEscolhaEspecificacaoParafuso">Prosseguir</button>
+                    </div>
+
+
+                    <div id="telaEscolherEspecificacaoParafuso" class="uk-hidden">
+
+                        <!---Colocar as tabelas....-->
+
+                        <div id="container-opt-tabelada-ingles" class="uk-hidden">
+                            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+                                <li><a href="#">Especificações da SAE.</a></li>
+                                <li><a href="#">Especificações da ASTM.</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>
+                                    <select class="uk-select" id="select-valor-tabela-sae">
+                                        <option selected value="33">1 - 33Kpsi</option>
+                                        <option value="55">2 - 55Kpsi</option>
+                                        <option value="33">2 - 33Kpsi</option>
+                                        <option value="65">4 - 65Kpsi</option>
+                                        <option value="85">5 - 85Kpsi</option>
+                                        <option value="74">5 - 74Kpsi</option>
+                                        <option value="85">5,2 - 85Kpsi</option>
+                                        <option value="105">7 - 105Kpsi</option>
+                                        <option value="120">8 - 120Kpsi</option>
+                                        <option value="120">8,2 - 120Kpsi</option>
+                                      </select>
+                                </li>
+                                <li>
+                                    <select class="uk-select" id="select-valor-tabela-astm">
+                                        <option selected value="33">A307 - 33Kpsi</option>
+                                        <option value="85">A325, tipo f - 85Kpsi</option>
+                                        <option value="74">A325, tipo f - 74Kpsi</option>
+                                        <option value="85">A325, tipo 2 - 85Kpsi</option>
+                                        <option value="74">A325, tipo 2 - 74Kpsi</option>
+                                        <option value="85">A325, tipo 3 - 85Kpsi</option>
+                                        <option value="74">A325, tipo 3 - 74Kpsi</option>
+                                        <option value="105">A354, grau BC - 105Kpsi</option>
+                                        <option value="95">A354, grau BC - 95Kpsi</option>
+                                        <option value="120">A354, grau BD - 120Kpsi</option>
+                                        <option value="85">A449 - 85Kpsi</option>
+                                        <option value="74">A449 - 74Kpsi</option>
+                                        <option value="55">A449 - 55Kpsi</option>
+                                        <option value="120">A490, tipo 1 - 120Kpsi</option>
+                                        <option value="120">A490, tipo 3 - 120Kpsi</option>
+                                      </select>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div id="container-opt-tabelada-metrico" class="uk-hidden">
+                            <select class="uk-select" id="select-valor-tabela-metrico">
+                                <option selected value="225">4,6 - 225MPa</option>
+                                <option value="310">4,8 - 310MPa</option>
+                                <option value="380">5,8 - 380MPa</option>
+                                <option value="600">8,8 - 600MPa</option>
+                                <option value="650">9,8 - 650MPa</option>
+                                <option value="830">10,9 - 830MPa</option>
+                                <option value="970">12,9 - 970MPa</option>
+                              </select>
+                        </div>
+
+                        <button class="uk-button uk-button-default" id="btProsseguirTelaTipoConexao">Prosseguir</button>
+
+                    </div>
+
+                    <div id="telaTipoConexao" class="uk-hidden">
+                        <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+                            <li onclick="__set().setPlanoCalculoResistencia('permanente');"><a href="#">Permanente.</a></li><br>
+                            <li onclick="__set().setPlanoCalculoResistencia('naopermanente');"><a href="#">Não Permanente.</a></li>
+                        </ul>
+
                         <button class="uk-button uk-button-default" id="btProsseguirCalculoFinal">Calcular</button>
                     </div>
+
+
+
 
                     <div id="telaCalculoFinal" class="uk-hidden">
 

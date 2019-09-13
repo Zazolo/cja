@@ -649,6 +649,11 @@ let calculo = {
     porca: {wPorca: '0', hPorca: '0'},
     wParafuso: 0,
     furo:0,
+    quantidadeParafusos:0,
+    valorResistencia:0,
+    planoResistencia:'tabelada',
+    cargaExternaTotal:0,
+    planoLigacao: '',
     L_definido : undefined
 }
 
@@ -1506,4 +1511,87 @@ function calcRigidezMembros(calculo){
     }
 
     return km;
+}
+
+
+function calcSp(calculo){
+    if(calculo.planoResistencia == 'tabelada'){
+        //-->pega somente o valor na tabela
+        return calculo.valorResistencia;
+    } else {
+        /**
+         * Se o usuário não escolheu o valor tabelado, logo ele digitou o
+         * valor da resistência, que será calculado abaixo.
+         * 
+        */
+        
+        let sp = 0.85 * calculo.valorResistencia;
+        return sp;
+    }
+    
+}
+
+function calcFi(calculo){
+    let fi;
+    let fp = calcFp(calculo);;
+    if(calculo.unidade == 'in'){
+        fi = 0.9 * fp;
+    } else {
+        fi = 0.75 * fp;
+    }
+
+    return fi;
+}
+
+function calcFp(calculo){
+    let at = parseFloat(calculo.AreaRosqueada);
+    let sp = calcSp(calculo);
+    let fp = at * sp;
+    return fp;
+}
+
+function calcFracaoCargaC(calculo){
+    let kb = calcRigidez(calculo);
+    let km = calcRigidezMembros(calculo);
+    let _C = kb/(kb+km);
+    return _C;
+}
+
+//Cálculo da carga externa parcial
+function calcPp(calculo){
+    let pt = calculo.cargaExternaTotal;
+    let qp = calculo.quantidadeParafusos;
+    let pp = pt/qp;
+    return pp;
+}
+
+//Fator de segurança ao escoamento
+function calcNp(calculo){
+    let Fi = calcFi(calculo);
+    let _C = calcFracaoCargaC(calculo);
+    let Pp = calcPp(calculo);
+    let Sp = calcSp(calculo);
+    let At = parseFloat(calculo.AreaRosqueada);
+    let np = ((Sp * At)/((_C * Pp)+Fi));
+    return np;
+}
+
+// Fator de segurança a sobrecarga
+function calcNl(calculo){
+    let Fi = calcFi(calculo);
+    let _C = calcFracaoCargaC(calculo);
+    let Pp = calcPp(calculo);
+    let Sp = calcSp(calculo);
+    let At = parseFloat(calculo.AreaRosqueada);
+    let nl = (((Sp * At)-Fi)/(_C * Pp));
+    return nl;
+}
+
+//Fator de segurança baseado na abertura da junta
+function calcNo(calculo){
+    let Fi = calcFi(calculo);
+    let _C = calcFracaoCargaC(calculo);
+    let Pp = calcPp(calculo);
+    let no = ( Fi / ( Pp * ( 1 - _C ) ) );
+    return no;
 }

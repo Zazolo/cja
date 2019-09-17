@@ -653,7 +653,7 @@ let calculo = {
     valorResistencia:0,
     planoResistencia:'tabelada',
     cargaExternaTotal:0,
-    planoLigacao: '',
+    planoLigacao: 'permanente',
     L_definido : undefined
 }
 
@@ -1534,7 +1534,7 @@ function calcSp(calculo){
 function calcFi(calculo){
     let fi;
     let fp = calcFp(calculo);;
-    if(calculo.unidade == 'in'){
+    if(calculo.planoLigacao == 'permanente'){
         fi = 0.9 * fp;
     } else {
         fi = 0.75 * fp;

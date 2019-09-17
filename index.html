@@ -46,8 +46,8 @@
                                 <li onclick="__set().unidade('in');"><a href="#">Sistema Inglês</a></li>
                             </ul>
                             <ul class="uk-switcher uk-margin">
-                                <li>A sistema <b>métrico</b> será utilizado para os cálculos!</li>
-                                <li>O sistema <b>inglês</b> será a utilizado para os cálculos! </li>
+                                <li>O sistema <b>métrico</b> será utilizado para os cálculos!</li>
+                                <li>O sistema <b>inglês</b> será utilizado para os cálculos! </li>
                             </ul>
                         <button class="uk-button uk-button-default" id="btProsseguirUnidade">Prosseguir</button>
                     </div>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="uk-margin uk-hidden" id="dmParafusoIN">
-                            <label class="uk-form-label" for="select-diametro-parafuso-in">Selecione</label>
+                            <label class="uk-form-label" for="select-diametro-parafuso-in"></label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="select-diametro-parafuso-in">
                                     <option selected value='0.2500'>0,2500in (1/4)</option>
@@ -162,7 +162,7 @@
                         </div>
 
                         <div class="uk-hidden" id="selectPlacasPlaca2m">
-                            <label class="uk-form-label" for="select-placa-m-t2">Material da placa 2 (metro)</label>
+                            <label class="uk-form-label" for="select-placa-m-t2">Material da placa 2</label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="select-placa-m-t2">
                                     <option selected value="207">Aços - 207GPa</option>
@@ -173,7 +173,7 @@
                             </div>
                         </div>
                         <div class="uk-hidden" id="selectPlacasPlaca2in">
-                            <label class="uk-form-label" for="select-placa-in-t2">Material da placa 2 (polegada)</label>
+                            <label class="uk-form-label" for="select-placa-in-t2">Material da placa 2</label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="select-placa-in-t2">
                                     <option selected value="30">Aços - 30Mpsi</option>
@@ -183,6 +183,8 @@
                                 </select>
                             </div>
                         </div>
+                        <br>
+                        <br>
                         <button class="uk-button uk-button-default" id="btProsseguirQuantidadeArroela">Prosseguir</button>
                     </div>
 
@@ -255,8 +257,8 @@
                         <label class="uk-form-label" for="input-quantidade-parafuso">Quantidade de parafusos</label>
                         <input class="uk-input" placeholder="0" id="input-quantidade-parafuso">
                         <br>
-                        <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalIngles">Carga externa aplicada total (KIPS)</label>
-                        <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalMetrico">Carga externa aplicada total (KM)</label>
+                        <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalIngles">Carga externa aplicada total (Kpsi)</label>
+                        <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalMetrico">Carga externa aplicada total (Kn)</label>
                         <input class="uk-input" placeholder="0" id="input-carga-externa-total">
                         <br>
                         <label class="uk-form-label">
@@ -342,8 +344,8 @@
 
                     <div id="telaTipoConexao" class="uk-hidden">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-                            <li onclick="__set().setPlanoCalculoResistencia('permanente');"><a href="#">Permanente.</a></li><br>
-                            <li onclick="__set().setPlanoCalculoResistencia('naopermanente');"><a href="#">Não Permanente.</a></li>
+                            <li onclick="__set().setPlanoCalculoLigacao('permanente');"><a href="#">Permanente</a></li><br>
+                            <li onclick="__set().setPlanoCalculoLigacao('naopermanente');"><a href="#">Não Permanente</a></li>
                         </ul>
 
                         <button class="uk-button uk-button-default" id="btProsseguirCalculoFinal">Calcular</button>
@@ -369,13 +371,30 @@
             <div></div>
             <div class="uk-width-xxlarge no-bkg">
                 <div class="uk-card-body uk-width-xxlarge">
-                    <div uk-lightbox id="btVerTabelaSistemaMetrico" class="uk-hidden">
-                        <a class="uk-button uk-button-default uk-background-muted" href="./img/tableaSistemaMetrico.png">Medidas do Sistema Métrico</a>
+                    <div id="btnsBottomContainerMetrico" class="uk-hidden">
+                        <div uk-lightbox >
+                            <a class="uk-button uk-background-muted" href="./img/tableaSistemaMetrico.png">Medidas dos membros no Sistema Métrico</a>
+                        </div>
+                        <br>
+                        <div uk-lightbox >
+                            <a class="uk-button uk-background-muted " href="./img/tabelaMetrico.png">Especificações do Sistema Métrico</a>
+                        </div>
+                    </div>
+                    
+                    <div id="btnsBottomContainerIngles" class="uk-hidden">
+                        <div uk-lightbox >
+                            <a class="uk-button uk-background-muted " href="./img/tableaSistemaIngles.png">Medida dos membros no Sistema Inglês</a>
+                        </div>
+                        <br>
+                        <div uk-lightbox >
+                            <a class="uk-button uk-background-muted" href="./img/tabelaASTM.png">Especificações ASTM</a>
+                        </div>
+                        <br>
+                        <div uk-lightbox >
+                            <a class="uk-button uk-background-muted" href="./img/tabelaSAE.png">Especificações SAE</a>
+                        </div>
                     </div>
 
-                    <div uk-lightbox id="btVerTabelaSistemaIngles" class="uk-hidden">
-                        <a class="uk-button uk-button-default uk-background-muted" href="./img/tableaSistemaIngles.png">Medidas do Sistema Ingês</a>
-                    </div>
                 </div>
             </div>
             <div></div>

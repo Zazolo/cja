@@ -22,10 +22,10 @@ window.addEventListener("load", function () {
     document.getElementById("btProsseguirUnidade").addEventListener("click", function(event) {
         __showHide("tabelaContainerDivMaster");
         if(calculo.unidade == 'm'){
-            __showHide("btVerTabelaSistemaMetrico");
+            __showHide("btnsBottomContainerMetrico");
             selectDiametroM();
         } else {
-            __showHide("btVerTabelaSistemaIngles");
+            __showHide("btnsBottomContainerIngles");
             selectDiametroIN();
         }
 
@@ -44,9 +44,11 @@ window.addEventListener("load", function () {
         //console.log("Quantidades de placas definida para " + calculo.qtdPlacas);
         if(calculo.unidade == 'm'){
             __showHide('dmParafusoM');
+            selectDiametroM();
         } else {
             if(calculo.unidade == 'in'){
                 __showHide('dmParafusoIN');
+                selectDiametroIN();
             }
         }
     });
@@ -62,7 +64,9 @@ window.addEventListener("load", function () {
                 if (calculo.unidade == 'm'){
                     document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em milímetro";
                     __showHide("selectPlacasPlaca1m");
+                    __set().setTipoPlaca(1, $("#select-placa-m-t1").val());
                 } else {
+                    __set().setTipoPlaca(1, $("#select-placa-in-t1").val());
                     document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em polegada decimal";
                     __showHide("selectPlacasPlaca1in");
                 }
@@ -76,11 +80,15 @@ window.addEventListener("load", function () {
                     document.getElementById("input-espessura-placa-2").placeholder = "Informe o valor desejado em milímetro";
                     __showHide("selectPlacasPlaca1m");
                     __showHide("selectPlacasPlaca2m");
+                    __set().setTipoPlaca(1, $("#select-placa-m-t1").val());
+                    __set().setTipoPlaca(2, $("#select-placa-m-t2").val());
                 } else {
                     document.getElementById("input-espessura-placa-1").placeholder = "Informe o valor desejado em polegada decimal";
                     document.getElementById("input-espessura-placa-2").placeholder = "Informe o valor desejado em polegada decimal";
                     __showHide("selectPlacasPlaca1in");
                     __showHide("selectPlacasPlaca2in");
+                    __set().setTipoPlaca(1, $("#select-placa-in-t1").val());
+                    __set().setTipoPlaca(2, $("#select-placa-in-t2").val());
                 }
             break;
 
@@ -192,7 +200,7 @@ window.addEventListener("load", function () {
             }
         }
 
-        __trocaSubDisplay("Selecione a quantidade de arruelas.");
+        __trocaSubDisplay("Selecione a quantidade de arruelas e sua posição.");
         __showHide("telaSelecaoPlacas");
         __showHide("telaSelecaoQtdArroelas");
         
@@ -348,7 +356,7 @@ window.addEventListener("load", function () {
             return;
         }
         
-        __trocaSubDisplay("Escolha a especifição do parafuso, consequentemente, escolha o tipo de parafuso e a sua resistência mínima correspondente.");
+        __trocaSubDisplay("Informe o valor da resistência mínima de escoamento (Sy)");
         __showHide("telaEscolherEspecificacaoParafuso");
         __showHide("telaInformacaoAvaliacao");
 

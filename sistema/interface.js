@@ -20,11 +20,13 @@ window.addEventListener("load", function () {
 
 
     document.getElementById("btProsseguirUnidade").addEventListener("click", function(event) {
-        __showHide("tabelaContainerDivMaster");
+        __showHide("btVerMedidas");
         if(calculo.unidade == 'm'){
             __showHide("btnsBottomContainerMetrico");
+            $("#offcanvas-slide").remove("btnsBottomContainerIngles");
             selectDiametroM();
         } else {
+            $("#offcanvas-slide").remove("btnsBottomContainerMetrico");
             __showHide("btnsBottomContainerIngles");
             selectDiametroIN();
         }
@@ -196,7 +198,7 @@ window.addEventListener("load", function () {
                 __set().setTipoPlaca(1, $("#select-placa-in-t1").val());
             } else if (calculo.qtdPlacas == 2){
                 __set().setTipoPlaca(1, $("#select-placa-in-t1").val());
-                __set().setTipoPlaca(1, $("#select-placa-in-t2").val());
+                __set().setTipoPlaca(2, $("#select-placa-in-t2").val());
             }
         }
 
@@ -237,7 +239,10 @@ window.addEventListener("load", function () {
                         if(calculo.diametro == tdp_m[i].diametro){
                             for(let j = 0; j < tdp_m[i].arruela.length; j++){
                                 if(tdp_m[i].arruela[j] != null){
-                                    
+                                    if(calculo.tipoArruela == undefined | ''){
+                                        console.log('Auto selecionando o tipo da arruela para: ' + tdp_m[i].arruela[j]);
+                                        __set().setTipoArruela(tdp_m[i].arruela[j]);
+                                    }
                                     $("#select-tipo-arruela").append("<option value='" + tdp_m[i].arruela[j] + "'>"+tdp_m[i].arruela[j]+"mm "+ ElementosTextuaisMetrico[j] +"</option>");
                                 }
                             }
@@ -250,7 +255,10 @@ window.addEventListener("load", function () {
                         if(calculo.diametro == tdp_in[i].diametro){
                             for(let j = 0; j < tdp_in[i].arruela.length; j++){
                                 if(tdp_in[i].arruela[j] != null){
-                                    console.log("APPENDING to SELECT (tipo_arruela): " + tdp_in[i].arruela[j]);
+                                    if(calculo.tipoArruela == undefined | ''){
+                                        console.log('Auto selecionando o tipo da arruela para: ' + tdp_in[i].arruela[j]);
+                                        __set().setTipoArruela(tdp_in[i].arruela[j]);
+                                    }
                                     $("#select-tipo-arruela").append("<option value='" + tdp_in[i].arruela[j] + "'>"+tdp_in[i].arruela[j]+"in "+ ElementosTextuaisIngles[j] +"</option>");
                                 }
                             }
@@ -291,7 +299,7 @@ window.addEventListener("load", function () {
                 for(let i = 0; i<tdp_in.length; i++){
                     if(calculo.diametro == tdp_in[i].diametro){
                         console.log("Encontrou: " + "H: " + tdp_in[i].hPorca + " | W: " + tdp_in[i].wPorca);
-                        $("#label-info-tipo-porca").text("H: " + tdp_in[i].hPorca + "\nW: " + tdp_in[i].wPorca);
+                        $("#label-info-tipo-porca").text("H: " + tdp_in[i].hPorca + "in   \n\n   W: " + tdp_in[i].wPorca + "in");
                         calculo.porca.hPorca = tdp_in[i].hPorca;
                         calculo.porca.wPorca = tdp_in[i].wPorca;
                     }
@@ -379,6 +387,11 @@ window.addEventListener("load", function () {
 
     });
 
+    document.getElementById("input-resistencia-calculada").addEventListener("keyup", function(){
+        __set().setValorResistencia($("#input-resistencia-calculada").val());
+    });
+    
+
     document.getElementById("btProsseguirTelaTipoConexao").addEventListener("click", function(){
 
         if(calculo.planoResistencia == 'calculada'){
@@ -407,6 +420,13 @@ window.addEventListener("load", function () {
         var resultRigidez = calcRigidez(calculo);
         var resultRigidezMembros = calcRigidezMembros(calculo);
 
+        var resultFp = calcFp(calculo);
+        var resultFi = calcFi(calculo);
+        var resultFracaoCargaC = calcFracaoCargaC(calculo);
+        var resultPp = calcPp(calculo);
+        var resultNp = calcNp(calculo);
+        var resultNl = calcNl(calculo);
+        var resultNo = calcNo(calculo);
 
         $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
         $("#telaCalculoFinal").append("<p>Calculo de Rigidez dos Membros: " + resultRigidezMembros + "</p>");
@@ -424,6 +444,15 @@ window.addEventListener("load", function () {
         }
         $("#telaCalculoFinal").append("<p>wParafuso : " + calculo.wParafuso + "</p>");
         $("#telaCalculoFinal").append("<p>Tamanho do Furo: " + calculo.furo + "</p>");
+
+
+        $("#telaCalculoFinal").append("<p>Calculo Fp: " + resultFp + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo Fi: " + resultFi + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo Fração da Carca (C): " + resultFracaoCargaC + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo Pp: " + resultPp + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo Np: " + resultNp + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo Nl: " + resultNl + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo No: " + resultNo + "</p>");
     });
 
 
@@ -518,7 +547,7 @@ function __set(){
         },
         setPlanoCalculoLigacao : (plano) => {
             calculo.planoLigacao = plano;
-            console.log("O selecinou: " + calculo.planoResistencia);
+            console.log("O selecinou: " + calculo.planoLigacao);
         },
         setValorResistencia : (resistencia) => {
             calculo.valorResistencia = resistencia;

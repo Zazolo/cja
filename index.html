@@ -18,7 +18,19 @@
         <br>
         <br>
         <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-            <div></div>
+            <div>
+
+
+
+
+
+
+                
+
+
+
+
+            </div>
             <div class="uk-width-xxlarge">
                 <div id="logo_others_container" class="uk-hidden">
                     <img src="./img/logo.jpeg" class="logo_others">
@@ -228,7 +240,6 @@
                         <label class="uk-form-label uk-hidden" id="legendaTipoArruelaIngles">Legenda:<br>N = Narrow(Estreita); W = Wide(Larga).</label>
                         <br>
                         <br>
-                        <br>
                         <button class="uk-button uk-button-default" id="btProsseguirTipoPorca">Prosseguir</button>
                     </div>
 
@@ -248,7 +259,8 @@
                                 Exibindo?
                             </label>
                         </div>
-                        
+                        <br>
+                        <br>
                         <button class="uk-button uk-button-default" id="btProsseguirInformacaoAvaliacao">Prosseguir</button>
                     </div>
 
@@ -338,21 +350,20 @@
                               </select>
                         </div>
 
+                        <br>
+
                         <button class="uk-button uk-button-default" id="btProsseguirTelaTipoConexao">Prosseguir</button>
 
                     </div>
 
                     <div id="telaTipoConexao" class="uk-hidden">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-                            <li onclick="__set().setPlanoCalculoLigacao('permanente');"><a href="#">Permanente</a></li><br>
+                            <li onclick="__set().setPlanoCalculoLigacao('permanente');"><a href="#">Permanente</a></li>
                             <li onclick="__set().setPlanoCalculoLigacao('naopermanente');"><a href="#">Não Permanente</a></li>
                         </ul>
 
                         <button class="uk-button uk-button-default" id="btProsseguirCalculoFinal">Calcular</button>
                     </div>
-
-
-
 
                     <div id="telaCalculoFinal" class="uk-hidden">
 
@@ -361,43 +372,40 @@
                         </label>
 
                     </div>
-                </div>
-            </div>
-            <div></div>
-        </div>
-        <br>
-        <br>
-        <div id="tabelaContainerDivMaster" class="uk-child-width-expand@s uk-text-center uk-hidden" uk-grid>
-            <div></div>
-            <div class="uk-width-xxlarge no-bkg">
-                <div class="uk-card-body uk-width-xxlarge">
-                    <div id="btnsBottomContainerMetrico" class="uk-hidden">
-                        <div uk-lightbox >
-                            <a class="uk-button uk-background-muted" href="./img/tableaSistemaMetrico.png">Medidas dos membros no Sistema Métrico</a>
-                        </div>
-                        <br>
-                        <div uk-lightbox >
-                            <a class="uk-button uk-background-muted " href="./img/tabelaMetrico.png">Especificações do Sistema Métrico</a>
-                        </div>
-                    </div>
-                    
-                    <div id="btnsBottomContainerIngles" class="uk-hidden">
-                        <div uk-lightbox >
-                            <a class="uk-button uk-background-muted " href="./img/tableaSistemaIngles.png">Medida dos membros no Sistema Inglês</a>
-                        </div>
-                        <br>
-                        <div uk-lightbox >
-                            <a class="uk-button uk-background-muted" href="./img/tabelaASTM.png">Especificações ASTM</a>
-                        </div>
-                        <br>
-                        <div uk-lightbox >
-                            <a class="uk-button uk-background-muted" href="./img/tabelaSAE.png">Especificações SAE</a>
-                        </div>
-                    </div>
 
+                    <br><br>
+                   
+                    <a href="#offcanvas-slide" class="uk-button uk-button-default uk-hidden" id="btVerMedidas" uk-toggle>Ver medidas</a>
+    
                 </div>
             </div>
             <div></div>
         </div>
+        
+        <div id="offcanvas-slide" uk-offcanvas uk-lightbox>
+            <div class="uk-offcanvas-bar">
+        
+                <div id="btnsBottomContainerMetrico" class="uk-hidden">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-nav-header">Tabelas</li>
+                            <li ><a href="./img/tableaSistemaMetrico.png">Medidas dos membros no Sistema Métrico</a></li>
+                            <li ><a href="./img/tabelaMetrico.png">Especificações do Sistema Métrico</a></li>
+                        </ul>
+                </div>
+                
+                <div id="btnsBottomContainerIngles" class="uk-hidden">
+                    <ul class="uk-nav uk-nav-default">
+                        <li class="uk-nav-header">Tabelas</li>
+                        <li ><a href="./img/tableaSistemaIngles.png">Medida dos membros no Sistema Inglês</a></li>
+                        <li ><a href="./img/tabelaASTM.png">Especificações ASTM</a></li>
+                        <li ><a href="./img/tabelaSAE.png">Especificações SAE</li>
+                    </ul>
+                </div>
+        
+                
+            </div>
+        </div>
+
+
     </body>
 </html>

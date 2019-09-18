@@ -21,3 +21,9 @@ html{
 .no-bkg{
     background: transparent!important;
 }
+
+#label-info-tipo-porca{
+    font-size: 25px;
+    font-weight: 700;
+    font-family: 'Segoe UI', sans-serif;
+}

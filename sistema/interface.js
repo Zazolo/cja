@@ -411,7 +411,7 @@ window.addEventListener("load", function () {
         __showHide("telaTipoConexao");
         __showHide("telaEscolherEspecificacaoParafuso");
         //---valor padrão para caso o usuário avance sem selecionar nada.;
-        __set().setPlanoCalculoResistencia('permanente');
+        __set().setPlanoCalculoLigacao('permanente');
 
     });
 

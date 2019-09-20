@@ -1515,7 +1515,9 @@ function calcRigidezMembros(calculo){
 
 
 function calcSp(calculo){
-    if(calculo.planoResistencia == 'tabelada'){
+
+    console.log("O plano de reistência é " + calculo.planoResistencia);
+    if(calculo.planoResistencia == "tabelada"){
         //-->pega somente o valor na tabela
         return calculo.valorResistencia;
     } else {
@@ -1534,7 +1536,8 @@ function calcSp(calculo){
 function calcFi(calculo){
     let fi;
     let fp = calcFp(calculo);;
-    if(calculo.planoLigacao == 'permanente'){
+    console.log("O plano de ligação é " + calculo.planoLigacao);
+    if(calculo.planoLigacao == "permanente"){
         fi = 0.9 * fp;
     } else {
         fi = 0.75 * fp;

@@ -15,22 +15,8 @@
     </head>
     <body>
         <br>
-        <br>
-        <br>
         <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-            <div>
-
-
-
-
-
-
-                
-
-
-
-
-            </div>
+            <div></div>
             <div class="uk-width-xxlarge">
                 <div id="logo_others_container" class="uk-hidden">
                     <img src="./img/logo.jpeg" class="logo_others">
@@ -196,7 +182,6 @@
                             </div>
                         </div>
                         <br>
-                        <br>
                         <button class="uk-button uk-button-default" id="btProsseguirQuantidadeArroela">Prosseguir</button>
                     </div>
 
@@ -211,7 +196,7 @@
                             <li>Esta opção é necessária caso você utilize parafusos com diâmetro maior que 36mm.<br>
                                 <a>Para melhor entendimento, veja o tutorial no tópico 1.6</a></a></li><br>
                             <li>
-                                Selecione onde esta arruela irá: <br>
+                                Selecione onde esta a arruela ficará: <br><br>
                                 <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                                     
                                     <li onclick="__set().setQtdArroela(1, 'cabeca');"><a href="#">Abaixo da </b>cabeça do parafuso</a></li><br>
@@ -220,7 +205,6 @@
                             </li>
                             <li>Ao selecionar duas arruelas, obrigatoriamente elas serão posicionadas uma abaixo da cabeça do parafuso e a outra acima da porca.</li>
                         </ul>
-                        <br>
                         <br>
 
                         <button class="uk-button uk-button-default" id="btProsseguirTipoArruela">Prosseguir</button>
@@ -238,7 +222,6 @@
                         <br>
                         <label class="uk-form-label uk-hidden" id="legendaTipoArruelaMetrico">Legenda:<br>N = Narrow(Estreita); R = Regular(Normal); W = Wide(Larga).</label>
                         <label class="uk-form-label uk-hidden" id="legendaTipoArruelaIngles">Legenda:<br>N = Narrow(Estreita); W = Wide(Larga).</label>
-                        <br>
                         <br>
                         <button class="uk-button uk-button-default" id="btProsseguirTipoPorca">Prosseguir</button>
                     </div>
@@ -260,7 +243,6 @@
                             </label>
                         </div>
                         <br>
-                        <br>
                         <button class="uk-button uk-button-default" id="btProsseguirInformacaoAvaliacao">Prosseguir</button>
                     </div>
 
@@ -269,17 +251,19 @@
                         <label class="uk-form-label" for="input-quantidade-parafuso">Quantidade de parafusos</label>
                         <input class="uk-input" placeholder="0" id="input-quantidade-parafuso">
                         <br>
+                        <br>
                         <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalIngles">Carga externa aplicada total (Kpsi)</label>
                         <label class="uk-form-label uk-hidden" for="input-carga-externa-total" id="lblCargaExternaTotalMetrico">Carga externa aplicada total (Kn)</label>
                         <input class="uk-input" placeholder="0" id="input-carga-externa-total">
                         <br>
-                        <label class="uk-form-label">
+                        <br>
+                        <label class="uk-form-label desejaText">
                             Deseja escolher os valores de resistência mínima de tração (Sp), pré definidos em tabela ou deseja obter esse valor através de calculo a partir da resistência mínima de escoamento?
                         </label>
 
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-                            <li onclick="__set().setPlanoCalculoResistencia('tabelada');"><a href="#">Resistência mínima tabelada.</a></li><br>
-                            <li onclick="__set().setPlanoCalculoResistencia('calculada');"><a href="#">Resistência mínima calculada.</a></li>
+                            <li onclick="__set().setPlanoCalculoResistencia('tabelada');"><a href="#">Resistência mínima tabelada</a></li><br>
+                            <li onclick="__set().setPlanoCalculoResistencia('calculada');"><a href="#">Resistência mínima calculada</a></li>
                         </ul>
                        
                         <button class="uk-button uk-button-default" id="btProsseguirEscolhaEspecificacaoParafuso">Prosseguir</button>
@@ -372,15 +356,30 @@
                         </label>
 
                     </div>
-
-                    <br><br>
-                   
-                    <a href="#offcanvas-slide" class="uk-button uk-button-default uk-hidden" id="btVerMedidas" uk-toggle>Ver medidas</a>
-    
-                </div>
+               </div>
             </div>
             <div></div>
         </div>
+        
+        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+            <div>
+
+            </div>
+            <div>
+                <a href="#offcanvas-slide" class="uk-button uk-button-primary uk-hidden" id="btVerMedidas" uk-toggle>Ver medidas</a>
+            </div>
+            <div>
+                
+            </div>
+        </div>
+
+
+
+
+
+
+
+
         
         <div id="offcanvas-slide" uk-offcanvas uk-lightbox>
             <div class="uk-offcanvas-bar">

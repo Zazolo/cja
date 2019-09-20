@@ -27,3 +27,8 @@ html{
     font-weight: 700;
     font-family: 'Segoe UI', sans-serif;
 }
+
+.desejaText {
+    font-size: 20px;
+    font-weight: 500;
+}

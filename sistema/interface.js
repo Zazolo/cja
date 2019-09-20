@@ -322,7 +322,9 @@ window.addEventListener("load", function () {
 
         if(calculo.unidade == 'in'){
             __showHide('lblCargaExternaTotalIngles');
+            document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em quilolibra-força (Kips)";
         } else {
+            document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em Newton (N)";
             __showHide('lblCargaExternaTotalMetrico');
         }
 
@@ -364,11 +366,12 @@ window.addEventListener("load", function () {
             return;
         }
         
-        __trocaSubDisplay("Informe o valor da resistência mínima de escoamento (Sy)");
+        
         __showHide("telaEscolherEspecificacaoParafuso");
         __showHide("telaInformacaoAvaliacao");
-
-        //--->somente para caso o usuário avance sem selecionar nada.
+        
+        __trocaSubDisplay("Escolha a especificação do parafuso, consequentemente, escolha o tipo e a sua resistência mínima de prova (Sp) correspondente.");
+        
         if(calculo.unidade == 'in' && calculo.planoResistencia == 'tabelada'){
             __showHide("container-opt-tabelada-ingles");
             __set().setValorResistencia($("#select-valor-tabela-sae").val());
@@ -376,6 +379,7 @@ window.addEventListener("load", function () {
             __showHide("container-opt-tabelada-metrico");
             __set().setValorResistencia($("#select-valor-tabela-metrico").val());
         } else if(calculo.planoResistencia == 'calculada'){
+            __trocaSubDisplay("Informe o valor da resistência mínima de escoamento (Sy)");    
             __showHide("container-opt-calculada");
             if(calculo.unidade == 'in'){
                 __showHide("lblResistenciaCalculadaIngles");

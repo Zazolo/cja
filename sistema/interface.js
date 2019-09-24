@@ -277,6 +277,18 @@ window.addEventListener("load", function () {
     document.getElementById("btProsseguirTipoPorca").addEventListener("click", function(event) {
         __showHide("telaSelecaoTipoArruela");
         __showHide("telaSelecaoTipoPorca");
+
+        /**
+         * Verifica a tela anterior se o TIPO da arruela foi selecionado
+         * senão seleciona o primeiro
+         */
+        if(calculo.tipoArruela == '0'){
+            __set().setTipoArruela(parseFloat($("#select-tipo-arruela").val()));
+        }
+        
+
+
+
         switch(calculo.unidade){
             case 'm':
                 __trocaSubDisplay("Selecione o tipo de porca a ser utilizado.");  
@@ -286,7 +298,7 @@ window.addEventListener("load", function () {
                     if(calculo.diametro == tdp_m[i].diametro){
                         for(let j = 0; j < tdp_m[i].estilo.length; j++){
                             if(tdp_m[i].estilo[j] != null){
-                                $("#select-tipo-porca").append("<option data-porca='" + JSON.stringify(tdp_m[i].estilo[j]) + "'>Estilo "+(j+1)+" -> W:"+tdp_m[i].estilo[j].wPorca+"/H:"+tdp_m[i].estilo[j].hPorca+"</option>");
+                                $("#select-tipo-porca").append("<option data-porca='" + JSON.stringify(tdp_m[i].estilo[j]) + "'>Estilo "+(j+1)+" -> W:"+tdp_m[i].estilo[j].wPorca+"mm | H:"+tdp_m[i].estilo[j].hPorca+"mm</option>");
                             }
                         }
                     }
@@ -319,6 +331,14 @@ window.addEventListener("load", function () {
         __trocaSubDisplay("Preencha os campos abaixo para calcular os fatores de segurança.");
         __showHide("telaSelecaoTipoPorca");
         __showHide("telaInformacaoAvaliacao");
+
+        /**
+         * Seleciona automaricamente o tipo da porca caso o usuario nao tenha selecionado
+         * ainda;
+         */
+        if(calculo.porca.wPorca == '0'){
+            __set().setPorca($("#select-tipo-porca").find(':selected').data('porca'));
+        }
 
         if(calculo.unidade == 'in'){
             __showHide('lblCargaExternaTotalIngles');
@@ -382,9 +402,9 @@ window.addEventListener("load", function () {
             __trocaSubDisplay("Informe o valor da resistência mínima de escoamento (Sy)");    
             __showHide("container-opt-calculada");
             if(calculo.unidade == 'in'){
-                __showHide("lblResistenciaCalculadaIngles");
+                document.getElementById("input-resistencia-calculada").placeholder = "Informe o valor desejado em Mega Pascal (MPa)";
             } else {
-                __showHide("lblResistenciaCalculadaMetrico");
+                document.getElementById("input-resistencia-calculada").placeholder = "Informe o valor desejado em Kilo Psi (Kpsi)";
             }
         }
         

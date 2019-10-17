@@ -662,6 +662,8 @@ function calcTamanhoParafuso(calculo){ ///--------------------------------------
     let totalArruela = 0;
     let L;
 
+    
+
     //retorno parar recalcular no final;
     if(calculo.L_definido != undefined){
         return calculo.L_definido;

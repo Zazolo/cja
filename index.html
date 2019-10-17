@@ -348,10 +348,13 @@
 
                     <div id="telaCalculoFinal" class="uk-hidden">
 
-                        <label class="uk-form-label" id="label-info-calculo-final">
-                            
-                        </label>
+                        <div id="finalResumidoContainer">
+                            <!--Final resumido ficará aqui!-->
+                        </div>
 
+                        <button uk-toggle="target: #modalRFC" type="button">Ver todos os resultados</button>
+
+                        
                     </div>
                </div>
             </div>
@@ -371,6 +374,16 @@
         </div>
 
 
+        <div id="modalRFC" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-modal-dialog-large">
+                <h2 class="uk-modal-title">Resultados finais completo</h2>
+                <div id="finalCompletoDataContainer">
+
+                </div>
+                <button class="uk-modal-close" type="button">Ok</button>
+            </div>
+        </div>
+
 
 
 
@@ -386,6 +399,7 @@
                             <li class="uk-nav-header">Tabelas</li>
                             <li ><a href="./img/tableaSistemaMetrico.png">Medidas dos membros no Sistema Métrico</a></li>
                             <li ><a href="./img/tabelaMetrico.png">Especificações do Sistema Métrico</a></li>
+                            <li ><a href="./img/tabelaRigidezVariosElementos.png">Rigidez de diversos elementos</a></li>
                         </ul>
                 </div>
                 
@@ -395,6 +409,7 @@
                         <li ><a href="./img/tableaSistemaIngles.png">Medida dos membros no Sistema Inglês</a></li>
                         <li ><a href="./img/tabelaASTM.png">Especificações ASTM</a></li>
                         <li ><a href="./img/tabelaSAE.png">Especificações SAE</li>
+                        <li ><a href="./img/tabelaRigidezVariosElementos.png">Rigidez de diversos elementos</a></li>
                     </ul>
                 </div>
         

@@ -344,9 +344,10 @@ window.addEventListener("load", function () {
 
         __showHide('lblCargaExternaTotal');
         if(calculo.unidade == 'm'){
-            document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em quilolibra-força (Kips)";
-        } else {
             document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em Newton (N)";
+        } else {
+            document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em quilolibra-força (Kips)";
+            
         }
 
         //--->valor padrão para facilidar caso o usuario avance sem selecionar nada...;
@@ -446,43 +447,299 @@ window.addEventListener("load", function () {
         __showHide("telaCalculoFinal");
         __showHide("telaTipoConexao");
 
-        var resultRigidez = calcRigidez(calculo);
-        var resultRigidezMembros = calcRigidezMembros(calculo);
 
-        var resultFp = calcFp(calculo);
-        var resultFi = calcFi(calculo);
-        var resultFracaoCargaC = calcFracaoCargaC(calculo);
-        var resultPp = calcPp(calculo);
-        var resultNp = calcNp(calculo);
-        var resultNl = calcNl(calculo);
-        var resultNo = calcNo(calculo);
+        var resultL = calcTamanhoParafuso(calculo).toFixed(2);
+        var resultRigidez = calcRigidez(calculo).toFixed(2);
+        var resultNp = calcNp(calculo).toFixed(2);
+        var resultNo = calcNo(calculo).toFixed(2);
+        let objRigidez = calcRigidezMembros(calculo);
+        //---------------------------------------------;
+        let t1 = objRigidez.t1.toFixed(2)
+        let t2 = objRigidez.t2.toFixed(2)
+        let t3 = objRigidez.t3.toFixed(2)
+        let t4 = objRigidez.t4.toFixed(2)
+        let t5 = objRigidez.t5.toFixed(2)
+        let tt = objRigidez.tt.toFixed(2)
+        let x2 = objRigidez.x2.toFixed(2)
+        let x3 = objRigidez.x3.toFixed(2)
+        let x4 = objRigidez.x4.toFixed(2)
+        let d1 = objRigidez.d1.toFixed(2)
+        let d2 = objRigidez.d2.toFixed(2)
+        let d3 = objRigidez.d3.toFixed(2)
+        let d4 = objRigidez.d4.toFixed(2)
+        let d5 = objRigidez.d5.toFixed(2)
+        let k1 = objRigidez.k1.toFixed(2)
+        let k2 = objRigidez.k2.toFixed(2)
+        let k3 = objRigidez.k3.toFixed(2)
+        let k4 = objRigidez.k4.toFixed(2)
+        let k5 = objRigidez.k5.toFixed(2)
+        let km = objRigidez.km.toFixed(2)
+        var resultUnidade = calculo.unidade;
+        var resultWparafuso = calculo.wParafuso;    
+        var resultHporca = calculo.porca.hPorca;
+        var resultWporca = calculo.porca.wPorca;
+        var resultposArruela = calculo.posArruela; 
+        var resultplanResist = calculo.planoResistencia; 
+        var resultplanLiga = calculo.planoLigacao;
+        var resultCompRosque = calcComprimentoRosqueado(calculo).toFixed(2);
+        var resultCompUtil_N_Rosqueado = calcCompPorUtil_N_Rosqueavel(calculo).toFixed(2);
+        var resultParafusoMenosPorca = calcTamParafusoMenosPorca(calculo).toFixed(2);
+        var resultCompUtilRosque = calcCompPorUtilRosqueavel(calculo).toFixed(2);
+        var resultAreaDaPorção_N_Rosqueada = calcAreaPorUtilNaoRosqueada(calculo).toFixed(2);
+        var resultFp = calcFp(calculo).toFixed(2);
+        var resultFi = calcFi(calculo).toFixed(2);
+        var resultFracaoCargaC = calcFracaoCargaC(calculo).toFixed(4);
+        var resultPp = calcPp(calculo).toFixed(2);
+        var resultSp = calcSp(calculo);
 
-        $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo de Rigidez dos Membros: " + resultRigidezMembros.km + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
-        $("#telaCalculoFinal").append("<p>-----Informações Gerais--------------------------------------------</p>");
-        $("#telaCalculoFinal").append("<p>Unidade de medidada: " + calculo.unidade + "</p>");
-        $("#telaCalculoFinal").append("<p>Diâmetro do Parafuso: " + calculo.diametro + "</p>");
-        $("#telaCalculoFinal").append("<p>Área Rosqueada: " + calculo.AreaRosqueada + "</p>");
-        $("#telaCalculoFinal").append("<p>Quantidade de Placas: " + calculo.qtdPlacas + "</p>");
-        $("#telaCalculoFinal").append("<p>Posicao Arruela: " + calculo.posArruela + "</p>");
-        $("#telaCalculoFinal").append("<p>Total Arruela: " + calculo.tipoArruela + "</p>");
-        for(var i; i<calculo.qtdPlacas; i++){
-            
-            $("#telaCalculoFinal").append("<p>PLACA ["+ i +"] TIPO: " + calculo.placa[i].tipo + "</p>");
-            $("#telaCalculoFinal").append("<p>PLACA ["+ i +"] ESPESSURA: " + calculo.placa[i].espessura + "</p>");
+
+        
+        if(t3 == '0.00'){
+            t3 = ("-");
+        } else{
+            t3 = (t3 + "mm")
         }
-        $("#telaCalculoFinal").append("<p>wParafuso : " + calculo.wParafuso + "</p>");
-        $("#telaCalculoFinal").append("<p>Tamanho do Furo: " + calculo.furo + "</p>");
+
+        if(t4 == '0.00'){
+            t4 = ("-");
+        } else{
+            t4 = (t4 + "mm")
+        }
+
+        if(t5 == '0.00'){
+            t5 = ("-");
+        } else{
+            t5 = (t5 + "mm")
+        }
+
+        if(tt == '0.00'){
+            tt = ("-");
+        } else{
+            tt = (tt + "mm")
+        }
+
+        if(x2 == '0.00'){
+            x2 = ("-");
+        } else{
+            x2 = (x2 + "mm")
+        }
+
+        if(x3 == '0.00'){
+            x3 = ("-");
+        } else{
+            x3 = (x3 + "mm")
+        }
+
+        if(x4 == '0.00'){
+            x4 = ("-");
+        } else{
+            x4 = (x4 + "mm")
+        }
+
+        if(d3 == '0.00'){
+            d3 = ("-");
+        } else{
+            d3 = (d3 + "mm")
+        }
+
+        if(d4 == '0.00'){
+            d4 = ("-");
+        } else{
+            d4 = (d4 + "mm")
+        }
+        
+        if(d5 == '0.00'){
+            d5 = ("-");
+        } else{
+            d5 = (d5 + "mm")
+        }
+
+        if(k3 == '0.00'){
+            k3 = ("-");
+        } else{
+            k3 = (k3 + "MN/m")
+        }
+
+        if(k4 == '0.00'){
+            k4 = ("-");
+        } else{
+            k4 = (k4 + "MN/m")
+        }
+        
+        if(k5 == '0.00'){
+            k5 = ("-");
+        } else{
+            k5 = (k5 + "MN/m")
+        }
+
+        if(calculo.unidade == 'in'){
+            var resultUnidade = ("Inglês");
+            var resultEdeKb = ("30Mpsi (Aço)");
+        } else {
+            var resultUnidade = ("Métrico");
+            var resultEdeKb = ("207GPa (Aço)");               
+        }
+
+        if(calculo.posArruela == 'cabeca'){
+            var resultposArruela = ("Abaixo da cabeça do parafuso");
+            console.log("Posição abaixo da cabeça: " + resultposArruela);
+        }
+        if(calculo.posArruela == 'porca'){
+            var resultposArruela = ("Acima da porca");
+            console.log("Acima da poca: " + resultposArruela);
+        }
+        if(calculo.posArruela == 'ambos'){
+            var resultposArruela = ("Abaixo da cabeça do parafuso/Acima da porca");
+            console.log("Acima da porca: " + resultposArruela);
+        }
+        if(calculo.posArruela == 'nenhuma'){
+            var resultposArruela = ("-");
+            console.log("Nenhuma: " + resultposArruela);
+        }
+
+        if(calculo.planoResistencia == "tabelada"){
+            var resultplanResist = ("Cálculo");
+        } else {
+            var resultplanResist = ("Tabela");
+        }
+
+        if(calculo.planoLigacao == "permanente"){
+            var resultplanLiga  = ("Permanente");
+        } else {
+            var resultplanLiga  = ("Não permanente");           
+        }
+
+        if(calculo.unidade == 'm'){
+            
+
+            $("#finalResumidoContainer").append("<strong>Comprimento mínimo do parafuso: </strong>" + resultL + "mm");
+            $("#finalResumidoContainer").append("<br><strong>Rigidez do parafuso: </strong>" + resultRigidez + "MN/m");
+            $("#finalResumidoContainer").append("<br><strong>Rigidez dos Membros: </strong>" + km + "MN/m");
+            $("#finalResumidoContainer").append("<br><strong>Fator de segurança ao escoamento: </strong>" + resultNp);
+            $("#finalResumidoContainer").append("<br><strong>Fator de segurança baseado na abertura da junta: </strong>" + resultNo);    
 
 
-        $("#telaCalculoFinal").append("<p>Calculo Fp: " + resultFp + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo Fi: " + resultFi + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo Fração da Carca (C): " + resultFracaoCargaC + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo Pp: " + resultPp + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo Np: " + resultNp + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo Nl: " + resultNl + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo No: " + resultNo + "</p>");
+            $("#finalCompletoDataContainer").append("<h4>Dados de entrada</h4>");
+            $("#finalCompletoDataContainer").append("<strong>Sistema de unidades: </strong>" + resultUnidade);
+            $("#finalCompletoDataContainer").append("<br><strong>Diâmetro do parafuso (d): </strong>" + calculo.diametro + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Diâmetro do furo (df): </strong>" + calculo.furo + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Área de tensão de tração do parafuso (At): </strong>" + calculo.AreaRosqueada + "mm²<br>");
+            $("#finalCompletoDataContainer").append("<strong>W do parafuso: </strong>" + resultWparafuso + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>W da porca: </strong>" + resultWporca + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>H da porca: </strong>" + resultHporca + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Quantidade de placas: </strong>" + calculo.qtdPlacas);
+            //O for abaixo não está informando os valores
+            for(var i; i< parseInt(calculo.qtdPlacas); i++){
+                console.log("está aqui! =)");
+                $("#finalCompletoDataContainer").append("<strong>PLACA ["+ i +"] TIPO: " + calculo.placa[i].tipo + "</p>");
+                $("#finalCompletoDataContainer").append("<strong>PLACA ["+ i +"] ESPESSURA: " + calculo.placa[i].espessura + "</p>");
+            }
+            $("#finalCompletoDataContainer").append("<br><strong>Posição da(s) arruela(s): </strong>" + resultposArruela);
+            $("#finalCompletoDataContainer").append("<br><strong>Quantida de arruela: </strong>" + calculo.qtdArruelas);
+            $("#finalCompletoDataContainer").append("<br><strong>Espessura total da(s) arruela(s): </strong>" + calculo.tipoArruela + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Quantidade de parafuso: </strong>" + calculo.quantidadeParafusos);   
+            $("#finalCompletoDataContainer").append("<br><strong>Carga externa total de tração aplicada à junta (Ptotal): </strong>" + calculo.cargaExternaTotal + "N<br>");   
+            $("#finalCompletoDataContainer").append("<strong>Forma de obter o valor da resistência de prova: </strong>" + resultplanResist);   
+            $("#finalCompletoDataContainer").append("<br><strong>Resistência mínima de prova (Sp): </strong>" + resultSp + "MPa<br>");
+            $("#finalCompletoDataContainer").append("<strong>Tipo de conexão utilizada: </strong>" + resultplanLiga);
+
+        //dados de saída
+            $("#finalCompletoDataContainer").append("<h4>Dados de saída</h4>");
+            $("#finalCompletoDataContainer").append("<strong>Comprimento mínimo do parafuso (L): </strong>" + resultL + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Comprimento rosqueado total do parafuso (Lt): </strong>" + resultCompRosque + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Comprimento de porção útil não rosqueada (ld): </strong>" + resultCompUtil_N_Rosqueado + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Espessura do material entre a face do parafuso e a face da porca (l): </strong>" + resultParafusoMenosPorca + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Comprimento de porção rosqueada (lt): </strong>" + resultCompUtilRosque + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>Área da porção não rosqueada (Ad): </strong>" + resultAreaDaPorção_N_Rosqueada + "mm²<br>");
+            $("#finalCompletoDataContainer").append("<strong>Modulo de elásticidade utilizado para o cálculo da rigidez parafuso (E): </strong>" + resultEdeKb);
+            $("#finalCompletoDataContainer").append("<strong><br>Rigidez do parafuso (Kb): </strong>" + resultRigidez + "MN/m<br>");
+
+            //Incluir os valores dos k(s), t(s), x(s) localizada na função de rigidez dos membros
+            $("#finalCompletoDataContainer").append("<br><strong>t1: </strong>" + t1 + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>t2: </strong>" + t2 + "mm<br>");
+            $("#finalCompletoDataContainer").append("<strong>t3: </strong>" + t3);
+            $("#finalCompletoDataContainer").append("<br><strong>t4: </strong>" + t4);
+            $("#finalCompletoDataContainer").append("<br><strong>t5: </strong>" + t5);
+            $("#finalCompletoDataContainer").append("<br><strong>tt: </strong>" + tt);
+            $("#finalCompletoDataContainer").append("<br><strong>x2: </strong>" + x2);
+            $("#finalCompletoDataContainer").append("<br><strong>x3: </strong>" + x3);
+            $("#finalCompletoDataContainer").append("<br><strong>x4: </strong>" + x4);
+            $("#finalCompletoDataContainer").append("<br><strong>D1: </strong>" + d1 + "mm");
+            $("#finalCompletoDataContainer").append("<br><strong>D2: </strong>" + d2 + "mm");
+            $("#finalCompletoDataContainer").append("<br><strong>D3: </strong>" + d3);
+            $("#finalCompletoDataContainer").append("<br><strong>D4: </strong>" + d4);
+            $("#finalCompletoDataContainer").append("<br><strong>D5: </strong>" + d5);
+            $("#finalCompletoDataContainer").append("<br><strong>k1: </strong>" + k1 + "MN/m");
+            $("#finalCompletoDataContainer").append("<br><strong>k2: </strong>" + k2 + "MN/m");
+            $("#finalCompletoDataContainer").append("<br><strong>k3: </strong>" + k3);
+            $("#finalCompletoDataContainer").append("<br><strong>k4: </strong>" + k4);
+            $("#finalCompletoDataContainer").append("<br><strong>k5: </strong>" + k5);
+            $("#finalCompletoDataContainer").append("<br><strong>Rigidez dos Membros (Km): </strong>" + km + "MN/m");
+            $("#finalCompletoDataContainer").append("<br><br><strong>Carga de prova (Fp): </strong>" + resultFp + "N");
+            $("#finalCompletoDataContainer").append("<br><strong>Pré-carga (Fi): </strong>" + resultFi + "N");
+            $("#finalCompletoDataContainer").append("<br><strong>Fração da carga externa P carregada pelo parafuso (C): </strong>" + resultFracaoCargaC);
+            $("#finalCompletoDataContainer").append("<br><strong>Carga externa de tração por parafuso (Pparcial): </strong>" + resultPp + "N");
+            $("#finalCompletoDataContainer").append("<br><strong>Fator de segurança ao escoamento (Np): </strong>" + resultNp);
+            $("#finalCompletoDataContainer").append("<br><strong>Fator de segurança baseado na abertura da junta (No): </strong>" + resultNo);
+        }
+        
+
+        if(calculo.unidade == 'in'){
+
+
+
+            $("#finalResumidoContainer").append("<strong>Comprimento mínimo do parafuso: </strong>" + resultL + "in");
+            $("#finalResumidoContainer").append("<br><strong>Rigidez do parafuso: </strong>" + resultRigidez + "Mlbf/in");
+            $("#finalResumidoContainer").append("<br><strong>Rigidez dos Membros: " + km + "Mlbf/in");
+            $("#finalResumidoContainer").append("<br><strong>Fator de segurança ao escoamento: </strong>" + resultNp);
+            $("#finalResumidoContainer").append("<br><strong>Fator de segurança baseado na abertura da junta: " + resultNo);
+
+
+            $("#finalCompletoDataContainer").append("<p>Dados de entrada</p>");
+            $("#finalCompletoDataContainer").append("<p>Sistema de unidades: " + resultUnidade + "</p>");
+            $("#finalCompletoDataContainer").append("<p>Diâmetro do parafuso (d): " + calculo.diametro + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Diâmetro do furo (df): " + calculo.furo + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Área de tensão de tração do parafuso (At): " + calculo.AreaRosqueada + "in²</p>");
+            $("#finalCompletoDataContainer").append("<p>W do parafuso: " + resultWparafuso + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>W da porca: " + resultWporca + "in </p>");
+            $("#finalCompletoDataContainer").append("<p>H da porca: " + resultHporca + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Quantidade de placas: " + calculo.qtdPlacas + "</p>");
+            //O for abaixo não está informando os valores
+            for(let i; i<parseInt(calculo.qtdPlacas); i++){
+                $("#finalCompletoDataContainer").append("<p>PLACA ["+ i +"] TIPO: " + calculo.placa[i].tipo + "</p>");
+                $("#finalCompletoDataContainer").append("<p>PLACA ["+ i +"] ESPESSURA: " + calculo.placa[i].espessura + "</p>");
+            }
+            $("#finalCompletoDataContainer").append("<p>Posição da(s) arruela(s): " + resultposArruela + "</p>");
+            $("#finalCompletoDataContainer").append("<p>Quantida de arruela: " + calculo.qtdArruelas + "</p>");
+            $("#finalCompletoDataContainer").append("<p>Espessura total da(s) arruela(s): " + calculo.tipoArruela + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Quantidade de parafuso: " + calculo.quantidadeParafusos + "</p>");   
+            $("#finalCompletoDataContainer").append("<p>Carga externa total de tração aplicada à junta (Ptotal): " + calculo.cargaExternaTotal + "Kips</p>");   
+            $("#finalCompletoDataContainer").append("<p>Forma de obter o valor da resistência de prova: " + resultplanResist + "</p>");   
+            $("#finalCompletoDataContainer").append("<p>Resistência mínima de prova (Sp): " + resultSp + "Kpsi</p>");
+            $("#finalCompletoDataContainer").append("<p>Tipo de conexão utilizada: " + resultplanLiga + "</p>");
+    
+    //dados de saída
+            $("#finalCompletoDataContainer").append("<p>Dados de saída</p>");
+            $("#finalCompletoDataContainer").append("<p>Comprimento mínimo do parafuso (L): " + resultL + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Comprimento rosqueado total do parafuso (Lt): " + resultCompRosque + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Comprimento de porção útil não rosqueada (ld): " + resultCompUtil_N_Rosqueado + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Espessura do material entre a face do parafuso e a face da porca (l): " + resultParafusoMenosPorca + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Comprimento de porção rosqueada (lt): " + resultCompUtilRosque + "in</p>");
+            $("#finalCompletoDataContainer").append("<p>Área da porção não rosqueada (Ad): " + resultAreaDaPorção_N_Rosqueada + "in²</p>");
+            $("#finalCompletoDataContainer").append("<p>Modulo de elásticidade utilizado para o cálculo da rigidez parafuso (E): " + resultEdeKb + "</p>");
+            $("#finalCompletoDataContainer").append("<p>Rigidez do parafuso (Kb): " + resultRigidez + "Mlbf/in</p>");
+        
+            //Incluir os valores dos k(s), t(s), x(s) localizada na função de rigidez dos membros
+            $("#finalCompletoDataContainer").append("<p>Rigidez dos Membros (Km): " + km + "Mlbf/in</p>");
+            $("#finalCompletoDataContainer").append("<p>Carga de prova (Fp): " + resultFp + "Kip</p>");
+            $("#finalCompletoDataContainer").append("<p>Pré-carga (Fi): " + resultFi + "Kip</p>");
+            $("#finalCompletoDataContainer").append("<p>Fração da carga externa P carregada pelo parafuso (C): " + resultFracaoCargaC + "</p>");
+            $("#finalCompletoDataContainer").append("<p>Carga externa de tração por parafuso (Pparcial): " + resultPp + "Kip</p>");
+            $("#finalCompletoDataContainer").append("<p>Fator de segurança ao escoamento (Np): " + resultNp + "</p>");
+            $("#finalCompletoDataContainer").append("<p>Fator de segurança baseado na abertura da junta (No): " + resultNo + "</p>");
+        }
+
+
     });
 
 

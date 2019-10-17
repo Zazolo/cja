@@ -468,6 +468,7 @@ window.addEventListener("load", function () {
         $("#telaCalculoFinal").append("<p>Posicao Arruela: " + calculo.posArruela + "</p>");
         $("#telaCalculoFinal").append("<p>Total Arruela: " + calculo.tipoArruela + "</p>");
         for(var i; i<calculo.qtdPlacas; i++){
+            asasasas
             $("#telaCalculoFinal").append("<p>PLACA ["+ i +"] TIPO: " + calculo.placa[i].tipo + "</p>");
             $("#telaCalculoFinal").append("<p>PLACA ["+ i +"] ESPESSURA: " + calculo.placa[i].espessura + "</p>");
         }

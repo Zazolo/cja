@@ -226,6 +226,7 @@ window.addEventListener("load", function () {
             $("#select-tipo-arruela").empty();
 
             if(calculo.posArruela == 'nenhuma'){
+                calculo.tipoArruela = 0;
                 $("#btProsseguirTipoPorca").click();
             }
 
@@ -282,6 +283,7 @@ window.addEventListener("load", function () {
          * Verifica a tela anterior se o TIPO da arruela foi selecionado
          * senão seleciona o primeiro
          */
+
         if(calculo.tipoArruela == '0'){
             __set().setTipoArruela(parseFloat($("#select-tipo-arruela").val()));
         }
@@ -340,12 +342,11 @@ window.addEventListener("load", function () {
             __set().setPorca($("#select-tipo-porca").find(':selected').data('porca'));
         }
 
-        if(calculo.unidade == 'in'){
-            __showHide('lblCargaExternaTotalIngles');
+        __showHide('lblCargaExternaTotal');
+        if(calculo.unidade == 'm'){
             document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em quilolibra-força (Kips)";
         } else {
             document.getElementById("input-carga-externa-total").placeholder = "Informe o valor desejado em Newton (N)";
-            __showHide('lblCargaExternaTotalMetrico');
         }
 
         //--->valor padrão para facilidar caso o usuario avance sem selecionar nada...;
@@ -390,7 +391,11 @@ window.addEventListener("load", function () {
         __showHide("telaEscolherEspecificacaoParafuso");
         __showHide("telaInformacaoAvaliacao");
         
-        __trocaSubDisplay("Escolha a especificação do parafuso, consequentemente, escolha o tipo e a sua resistência mínima de prova (Sp) correspondente.");
+        __trocaSubDisplay("Escolha a classe/resistência mínima de prova (Sp).");
+
+        if(calculo.unidade == 'in'){
+            __trocaSubDisplay("Escolha a norma/especificação. <br> Escolha a classe /resistência mínima de prova (Sp).")
+        }
         
         if(calculo.unidade == 'in' && calculo.planoResistencia == 'tabelada'){
             __showHide("container-opt-tabelada-ingles");
@@ -402,9 +407,9 @@ window.addEventListener("load", function () {
             __trocaSubDisplay("Informe o valor da resistência mínima de escoamento (Sy)");    
             __showHide("container-opt-calculada");
             if(calculo.unidade == 'in'){
-                document.getElementById("input-resistencia-calculada").placeholder = "Informe o valor desejado em Mega Pascal (MPa)";
-            } else {
                 document.getElementById("input-resistencia-calculada").placeholder = "Informe o valor desejado em Kilo Psi (Kpsi)";
+            } else {
+                document.getElementById("input-resistencia-calculada").placeholder = "Informe o valor desejado em Mega Pascal (MPa)";
             }
         }
         
@@ -453,7 +458,7 @@ window.addEventListener("load", function () {
         var resultNo = calcNo(calculo);
 
         $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
-        $("#telaCalculoFinal").append("<p>Calculo de Rigidez dos Membros: " + resultRigidezMembros + "</p>");
+        $("#telaCalculoFinal").append("<p>Calculo de Rigidez dos Membros: " + resultRigidezMembros.km + "</p>");
         $("#telaCalculoFinal").append("<p>Calculo de Rigidez: " + resultRigidez + "</p>");
         $("#telaCalculoFinal").append("<p>-----Informações Gerais--------------------------------------------</p>");
         $("#telaCalculoFinal").append("<p>Unidade de medidada: " + calculo.unidade + "</p>");

@@ -338,7 +338,7 @@ window.addEventListener("load", function () {
          * Seleciona automaricamente o tipo da porca caso o usuario nao tenha selecionado
          * ainda;
          */
-        if(calculo.porca.wPorca == '0'){
+        if(calculo.porca.wPorssca == '0'){
             __set().setPorca($("#select-tipo-porca").find(':selected').data('porca'));
         }
 

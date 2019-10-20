@@ -15,30 +15,33 @@
     </head>
     <body>
         <br>
-        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+        <div class="uk-child-width-expand@s " uk-grid>
             <div></div>
             <div class="uk-width-xxlarge">
-                <div id="logo_others_container" class="uk-hidden">
+                <div id="logo_others_container" class="uk-hidden uk-text-center">
                     <img src="./img/logo.jpeg" class="logo_others">
+
+                   
+
                 </div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-xxlarge">
-                    <div id="introInfoContainer">
+                    <div id="introInfoContainer" class="uk-text-center">
                             <h1 class="uk-heading-medium" id="displayInfoTitle">Bem-vindo(a) ao</h1>
                         <br>
                         <img src="./img/logo.jpeg" class="logoImgIntro">
                         <br>
                         <p>A seguir, informe os dados para realizar o cálculo</p>
                     </div>
-                    
-                    <h3 class="uk-card-title" id="displayInfoSubTitle"></h3>
+                   
+                    <h3 class="uk-card-title uk-text-center" id="displayInfoSubTitle"></h3>
                     
                     <!-----Divisor de tela----->
-                    <div id="telaIntro">
+                    <div id="telaIntro" class="uk-text-center">
                         <button class="uk-button uk-button-default" id="btIniciar">Iniciar</button>
                     </div>
                     
                     <!-----Divisor de tela----->
-                    <div id="telaSelectUnidade" class="uk-hidden">
+                    <div id="telaSelectUnidade" class="uk-hidden uk-text-center">
                             <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                                 <li onclick="__set().unidade('m');"><a href="#">Sistema métrico</a></li>
                                 <li onclick="__set().unidade('in');"><a href="#">Sistema Inglês</a></li>
@@ -51,7 +54,7 @@
                     </div>
                     
                     <!-----Divisor de tela----->
-                    <div id="telaSelectQuantidadePlaca" class="uk-hidden">
+                    <div id="telaSelectQuantidadePlaca" class="uk-hidden uk-text-center">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                             <li onclick="__set().qtdPlacas(1);"><a href="#">Uma</a></li>
                             <li onclick="__set().qtdPlacas(2);"><a href="#">Duas</a></li>
@@ -64,7 +67,7 @@
                     </div>
 
                     <!-----Divisor de tela----->
-                    <div id="telaDiametroParafuso" class="uk-hidden">
+                    <div id="telaDiametroParafuso" class="uk-hidden uk-text-center">
 
                         <div class="uk-margin uk-hidden" id="dmParafusoM">
                             <label class="uk-form-label" for="select-diametro-parafuso-m"></label>
@@ -93,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="uk-margin uk-hidden" id="dmParafusoIN">
+                        <div class="uk-margin uk-hidden " id="dmParafusoIN">
                             <label class="uk-form-label" for="select-diametro-parafuso-in"></label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="select-diametro-parafuso-in">
@@ -117,7 +120,7 @@
                     </div>
 
                     <!-----Divisor de tela----->
-                    <div id="telaSelecaoPlacas" class="uk-hidden">
+                    <div id="telaSelecaoPlacas" class="uk-hidden uk-text-center">
                         <!---
                             Lemebrar de variar o texto na frente das placas para definir a espessura de acordo
                         com o calculo.unidade.
@@ -186,7 +189,7 @@
                     </div>
 
                     <!-----Divisor de tela----->
-                    <div id="telaSelecaoQtdArroelas" class="uk-hidden">
+                    <div id="telaSelecaoQtdArroelas" class="uk-hidden uk-text-center">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                             <li onclick="__set().setQtdArroela(0, 'nenhuma');"><a href="#">Nenhuma</a></li><br>
                             <li><a href="#">Uma</a></li>
@@ -211,7 +214,7 @@
                     </div>
 
                     <!-----Divisor de tela----->
-                    <div id="telaSelecaoTipoArruela" class="uk-hidden">
+                    <div id="telaSelecaoTipoArruela" class="uk-hidden uk-text-center">
                         <label class="uk-form-label" for="select-tipo-arruela"></label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="select-tipo-arruela">
@@ -227,7 +230,7 @@
                     </div>
 
                     <!-----Divisor de tela----->
-                    <div id="telaSelecaoTipoPorca" class="uk-hidden">
+                    <div id="telaSelecaoTipoPorca" class="uk-hidden uk-text-center">
 
                         <div class="uk-form-controls uk-hidden" id="container-select-tipo-porca">
                             <select class="uk-select" id="select-tipo-porca">
@@ -246,7 +249,7 @@
                         <button class="uk-button uk-button-default" id="btProsseguirInformacaoAvaliacao">Prosseguir</button>
                     </div>
 
-                    <div id="telaInformacaoAvaliacao" class="uk-hidden">
+                    <div id="telaInformacaoAvaliacao" class="uk-hidden uk-text-center">
 
                         <label class="uk-form-label" for="input-quantidade-parafuso">Quantidade de parafusos</label>
                         <input class="uk-input" placeholder="0" id="input-quantidade-parafuso">
@@ -269,7 +272,7 @@
                     </div>
 
 
-                    <div id="telaEscolherEspecificacaoParafuso" class="uk-hidden">
+                    <div id="telaEscolherEspecificacaoParafuso" class="uk-hidden uk-text-center">
 
                         <!---Colocar as tabelas....-->
                         <div id="container-opt-calculada" class="uk-hidden">
@@ -337,7 +340,7 @@
 
                     </div>
 
-                    <div id="telaTipoConexao" class="uk-hidden">
+                    <div id="telaTipoConexao" class="uk-hidden uk-text-center">
                         <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
                             <li onclick="__set().setPlanoCalculoLigacao('permanente');"><a href="#">Permanente</a></li>
                             <li onclick="__set().setPlanoCalculoLigacao('naopermanente');"><a href="#">Não Permanente</a></li>
@@ -346,13 +349,16 @@
                         <button class="uk-button uk-button-default" id="btProsseguirCalculoFinal">Calcular</button>
                     </div>
 
-                    <div id="telaCalculoFinal" class="uk-hidden">
+                    <div id="telaCalculoFinal" class="uk-hidden uk-text-left">
 
-                        <div id="finalResumidoContainer">
+                        <div id="finalResumidoContainer" class=".uk-text-left">
                             <!--Final resumido ficará aqui!-->
                         </div>
-
-                        <button uk-toggle="target: #modalRFC" type="button">Ver todos os resultados</button>
+                        <div id="finalCompletoDataContainer" class="uk-hidden .uk-text-left">
+                            <!--Final completo ficará aqui!-->
+                        </div>
+                        <br>
+                        <button class="uk-button uk-button-primary" id="btVerRCompleto">Ver resultados completos</button>
 
                         
                     </div>
@@ -366,23 +372,18 @@
 
             </div>
             <div>
-                <a href="#offcanvas-slide" class="uk-button uk-button-primary uk-hidden" id="btVerMedidas" uk-toggle>Ver medidas</a>
+                <a href="#offcanvas-slide" class="uk-button uk-button-primary uk-hidden" id="btVerMedidas" uk-toggle>Informações</a>
+                <br>
+                <br>
             </div>
             <div>
                 
+
             </div>
         </div>
 
 
-        <div id="modalRFC" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body uk-modal-dialog-large">
-                <h2 class="uk-modal-title">Resultados finais completo</h2>
-                <div id="finalCompletoDataContainer">
-
-                </div>
-                <button class="uk-modal-close" type="button">Ok</button>
-            </div>
-        </div>
+       
 
 
 
@@ -413,6 +414,10 @@
                     </ul>
                 </div>
         
+                <ul class="uk-nav uk-nav-default">
+                    <li class="uk-nav-header">Tutorial</li>
+                    <li><a data-type="iframe" href="https://miro.medium.com/max/600/1*Lxo4kfn7LP5BKt4C8Owvjw.jpeg">Manual</a></li>
+                </ul>
                 
             </div>
         </div>
